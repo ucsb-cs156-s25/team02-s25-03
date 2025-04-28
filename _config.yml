@@ -23,4 +23,4 @@ repo_name: "TBD"
 repo: ucsb-cs156-s25/team02-s25-03
 owner: ucsb-cs156-s25
 repo_name: team02-s25-03
-pull_requests: []
+pull_requests: [{"author":{"id":"MDQ6VXNlcjY1OTQ0NzE3","is_bot":false,"login":"klai890","name":"Karena Lai"},"headRefName":"karena-articles-backend-crud","number":61,"title":"Copy backend CRUD operation files for Article Database from team01","url":"https://github.com/ucsb-cs156-s25/team02-s25-03/pull/61"}]
