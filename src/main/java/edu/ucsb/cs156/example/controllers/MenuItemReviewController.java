@@ -65,6 +65,7 @@ public class MenuItemReviewController extends ApiController {
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping("/post")
     public MenuItemReview postMenuItemReview(
+            @Parameter(name="itemId") @RequestParam long itemId,
             @Parameter(name="reviewerEmail") @RequestParam String reviewerEmail,
             @Parameter(name="stars") @RequestParam int stars,
             @Parameter(name="dateReviewed", description="date (in iso format, e.g. YYYY-mm-ddTHH:MM:SS; see https://en.wikipedia.org/wiki/ISO_8601)") @RequestParam("dateReviewed") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime dateReviewed,
@@ -77,6 +78,7 @@ public class MenuItemReviewController extends ApiController {
         log.info("localDateTime={}", dateReviewed);
 
         MenuItemReview menuItemReview = new MenuItemReview();
+        menuItemReview.setItemId(itemId);
         menuItemReview.setComments(comments);
         menuItemReview.setDateReviewed(dateReviewed);
         menuItemReview.setReviewerEmail(reviewerEmail);
@@ -121,6 +123,7 @@ public class MenuItemReviewController extends ApiController {
         MenuItemReview menuItemReview = menuItemReviewRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException(MenuItemReview.class, id));
 
+        menuItemReview.setItemId(incoming.getItemId());
         menuItemReview.setComments(incoming.getComments());
         menuItemReview.setDateReviewed(incoming.getDateReviewed());
         menuItemReview.setReviewerEmail(incoming.getReviewerEmail());

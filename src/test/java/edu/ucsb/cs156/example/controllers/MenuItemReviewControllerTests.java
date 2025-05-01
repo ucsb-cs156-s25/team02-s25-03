@@ -84,6 +84,7 @@ public class MenuItemReviewControllerTests extends ControllerTestCase {
                 LocalDateTime ldt1 = LocalDateTime.parse("2022-01-03T00:00:00");
 
                 MenuItemReview menuItemReview1 = MenuItemReview.builder()
+                    .itemId(1)
                     .reviewerEmail("null")
                     .stars(1)
                     .dateReviewed(ldt1)
@@ -116,6 +117,7 @@ public class MenuItemReviewControllerTests extends ControllerTestCase {
                 LocalDateTime ldt1 = LocalDateTime.parse("2022-01-03T00:00:00");
 
                 MenuItemReview menuItemReview1 = MenuItemReview.builder()
+                    .itemId(1)
                     .reviewerEmail("null")
                     .stars(1)
                     .dateReviewed(ldt1)
@@ -126,7 +128,7 @@ public class MenuItemReviewControllerTests extends ControllerTestCase {
 
                 // act
                 MvcResult response = mockMvc.perform(
-                                post("/api/menuitemreview/post?reviewerEmail=null&stars=1&dateReviewed=2022-01-03T00:00:00&comments=ldt1")
+                                post("/api/menuitemreview/post?itemId=1&reviewerEmail=null&stars=1&dateReviewed=2022-01-03T00:00:00&comments=ldt1")
                                                 .with(csrf()))
                                 .andExpect(status().isOk()).andReturn();
 
@@ -153,6 +155,7 @@ public class MenuItemReviewControllerTests extends ControllerTestCase {
                 LocalDateTime ldt1 = LocalDateTime.parse("2022-01-03T00:00:00");
 
                 MenuItemReview menuItemReview1 = MenuItemReview.builder()
+                    .itemId(1)
                     .reviewerEmail("null")
                     .stars(1)
                     .dateReviewed(ldt1)
@@ -204,6 +207,7 @@ public class MenuItemReviewControllerTests extends ControllerTestCase {
                 LocalDateTime ldt2 = LocalDateTime.parse("2023-01-03T00:00:00");
 
                 MenuItemReview menuItemReview1 = MenuItemReview.builder()
+                    .itemId(1)
                     .reviewerEmail("null")
                     .stars(1)
                     .dateReviewed(ldt1)
@@ -211,6 +215,7 @@ public class MenuItemReviewControllerTests extends ControllerTestCase {
                     .build();
 
                 MenuItemReview editedMenuItemReview = MenuItemReview.builder()
+                    .itemId(1)
                     .reviewerEmail("null2")
                     .stars(4)
                     .dateReviewed(ldt2)
@@ -246,6 +251,7 @@ public class MenuItemReviewControllerTests extends ControllerTestCase {
                 LocalDateTime ldt1 = LocalDateTime.parse("2022-01-03T00:00:00");
 
                 MenuItemReview menuItemReview1 = MenuItemReview.builder()
+                    .itemId(1)
                     .reviewerEmail("null")
                     .stars(1)
                     .dateReviewed(ldt1)
@@ -280,6 +286,7 @@ public class MenuItemReviewControllerTests extends ControllerTestCase {
                 LocalDateTime ldt1 = LocalDateTime.parse("2022-01-03T00:00:00");
 
                 MenuItemReview menuItemReview1 = MenuItemReview.builder()
+                    .itemId(1)
                     .reviewerEmail("null")
                     .stars(1)
                     .dateReviewed(ldt1)
