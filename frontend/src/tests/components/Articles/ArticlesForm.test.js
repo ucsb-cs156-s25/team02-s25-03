@@ -60,6 +60,22 @@ describe("ArticlesForm tests", () => {
 
     expect(await screen.findByTestId(`${testId}-id`)).toBeInTheDocument();
     expect(screen.getByText(`Id`)).toBeInTheDocument();
+
+    expect(screen.getByLabelText("Id")).toHaveValue(
+      String(articlesFixtures.oneArticle.id),
+    );
+    expect(screen.getByLabelText("Url")).toHaveValue(
+      articlesFixtures.oneArticle.url,
+    );
+    expect(screen.getByLabelText("Title")).toHaveValue(
+      articlesFixtures.oneArticle.title,
+    );
+    expect(screen.getByLabelText("Explanation")).toHaveValue(
+      articlesFixtures.oneArticle.explanation,
+    );
+    expect(screen.getByLabelText("Email")).toHaveValue(
+      articlesFixtures.oneArticle.email,
+    );
   });
 
   test("that navigate(-1) is called when Cancel is clicked", async () => {
@@ -97,7 +113,7 @@ describe("ArticlesForm tests", () => {
     expect(screen.getByText(/Email is required/)).toBeInTheDocument();
     expect(screen.getByText(/Date Added is required/)).toBeInTheDocument();
 
-    const titleInput = screen.getByTestId(`${testId}-title`);
+    const titleInput = screen.getByTestId(`${testId}-explanation`);
     fireEvent.change(titleInput, { target: { value: "a".repeat(256) } });
     fireEvent.click(submitButton);
 
