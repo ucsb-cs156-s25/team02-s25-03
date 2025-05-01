@@ -1,5 +1,5 @@
 const articlesFixtures = {
-  oneDate: {
+  oneArticle: {
     id: 1,
     title: "Some Article Title",
     url: "https://gmail.com",
@@ -7,7 +7,7 @@ const articlesFixtures = {
     email: "karena_lai@ucsb.edu",
     dateAdded: "2022-01-02T12:00:00",
   },
-  threeDates: [
+  threeArticles: [
     {
       id: 1,
       title: "Some Article Title",
