@@ -234,9 +234,9 @@ describe("RecommendationRequestTable tests", () => {
 
     // assert - check that the expected content is rendered
     await waitFor(() => {
-          expect(
-            screen.getByTestId(`${testId}-cell-row-0-col-id`),
-          ).toHaveTextContent("2");
+      expect(
+        screen.getByTestId(`${testId}-cell-row-0-col-id`),
+      ).toHaveTextContent("2");
     });
 
     const deleteButton = screen.getByTestId(
