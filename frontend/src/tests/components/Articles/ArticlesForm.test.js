@@ -112,9 +112,85 @@ describe("ArticlesForm tests", () => {
     expect(screen.getByText(/Explanation is required/)).toBeInTheDocument();
     expect(screen.getByText(/Email is required/)).toBeInTheDocument();
     expect(screen.getByText(/Date Added is required/)).toBeInTheDocument();
+  });
 
-    const titleInput = screen.getByTestId(`${testId}-explanation`);
+  test("that max length validation is performed for explanation", async () => {
+    render(
+      <QueryClientProvider client={queryClient}>
+        <Router>
+          <ArticlesForm />
+        </Router>
+      </QueryClientProvider>,
+    );
+
+    expect(await screen.findByText(/Create/)).toBeInTheDocument();
+
+    const submitButton = screen.getByText(/Create/);
+    const input = screen.getByTestId(`${testId}-explanation`);
+    fireEvent.change(input, { target: { value: "a".repeat(256) } });
+    fireEvent.click(submitButton);
+
+    await waitFor(() => {
+      expect(screen.getByText(/Max length 255 characters/)).toBeInTheDocument();
+    });
+  });
+
+  test("that max length validation is performed for title", async () => {
+    render(
+      <QueryClientProvider client={queryClient}>
+        <Router>
+          <ArticlesForm />
+        </Router>
+      </QueryClientProvider>,
+    );
+
+    expect(await screen.findByText(/Create/)).toBeInTheDocument();
+
+    const submitButton = screen.getByText(/Create/);
+    const titleInput = screen.getByTestId(`${testId}-title`);
     fireEvent.change(titleInput, { target: { value: "a".repeat(256) } });
+    fireEvent.click(submitButton);
+
+    await waitFor(() => {
+      expect(screen.getByText(/Max length 255 characters/)).toBeInTheDocument();
+    });
+  });
+
+  test("that max length validation is performed for url", async () => {
+    render(
+      <QueryClientProvider client={queryClient}>
+        <Router>
+          <ArticlesForm />
+        </Router>
+      </QueryClientProvider>,
+    );
+
+    expect(await screen.findByText(/Create/)).toBeInTheDocument();
+
+    const submitButton = screen.getByText(/Create/);
+    const urlInput = screen.getByTestId(`${testId}-url`);
+    fireEvent.change(urlInput, { target: { value: "a".repeat(256) } });
+    fireEvent.click(submitButton);
+
+    await waitFor(() => {
+      expect(screen.getByText(/Max length 255 characters/)).toBeInTheDocument();
+    });
+  });
+
+  test("that max length validation is performed for email", async () => {
+    render(
+      <QueryClientProvider client={queryClient}>
+        <Router>
+          <ArticlesForm />
+        </Router>
+      </QueryClientProvider>,
+    );
+
+    expect(await screen.findByText(/Create/)).toBeInTheDocument();
+
+    const submitButton = screen.getByText(/Create/);
+    const emailInput = screen.getByTestId(`${testId}-email`);
+    fireEvent.change(emailInput, { target: { value: "a".repeat(256) } });
     fireEvent.click(submitButton);
 
     await waitFor(() => {
