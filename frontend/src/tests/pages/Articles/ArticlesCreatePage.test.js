@@ -32,7 +32,7 @@ describe("ArticlesCreatePage tests", () => {
     render(
       <QueryClientProvider client={queryClient}>
         <MemoryRouter>
-          <ArticlesCreatePage/>
+          <ArticlesCreatePage />
         </MemoryRouter>
       </QueryClientProvider>,
     );
