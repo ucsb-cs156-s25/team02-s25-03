@@ -43,11 +43,16 @@ function ArticlesForm({
       <Form.Group className="mb-3">
         <Form.Label htmlFor="title">Title</Form.Label>
         <Form.Control
+          data-testid={testIdPrefix + "-title"}
           id="title"
           type="text"
           isInvalid={Boolean(errors.title)}
           {...register("title", {
             required: "Title is required.",
+            maxLength: {
+              value: 255,
+              message: "Max length 255 characters",
+            },
           })}
         />
         <Form.Control.Feedback type="invalid">
@@ -58,11 +63,16 @@ function ArticlesForm({
       <Form.Group className="mb-3">
         <Form.Label htmlFor="url">Url</Form.Label>
         <Form.Control
+          data-testid={testIdPrefix + "-url"}
           id="url"
           type="text"
           isInvalid={Boolean(errors.url)}
           {...register("url", {
             required: "Url is required.",
+            maxLength: {
+              value: 255,
+              message: "Max length 255 characters",
+            },
           })}
         />
         <Form.Control.Feedback type="invalid">
@@ -93,11 +103,16 @@ function ArticlesForm({
       <Form.Group className="mb-3">
         <Form.Label htmlFor="email">Email</Form.Label>
         <Form.Control
+          data-testid={testIdPrefix + "-email"}
           id="email"
           type="text"
           isInvalid={Boolean(errors.email)}
           {...register("email", {
             required: "Email is required.",
+            maxLength: {
+              value: 255,
+              message: "Max length 255 characters",
+            },
           })}
         />
         <Form.Control.Feedback type="invalid">
