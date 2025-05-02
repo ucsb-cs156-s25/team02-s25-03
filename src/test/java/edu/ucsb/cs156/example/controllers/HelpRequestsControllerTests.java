@@ -138,14 +138,14 @@ public class HelpRequestsControllerTests extends ControllerTestCase{
                         .tableOrBreakoutRoom("7")
                         .requestTime(z1)
                         .explanation("dokku-issue")
-                        .solved(false)
+                        .solved(true)
                         .build();
 
                 when(helpRequestRepository.save(eq(helprequest1))).thenReturn(helprequest1);
 
                 // act
                 MvcResult response = mockMvc.perform(
-                                post("/api/helprequests/post?requesterEmail=cgaucho@ucsb.edu&teamId=s22-5pm-3&tableOrBreakoutRoom=7&requestTime=2022-01-03T00:00:00Z&explanation=dokku-issue&solved=false")
+                                post("/api/helprequests/post?requesterEmail=cgaucho@ucsb.edu&teamId=s22-5pm-3&tableOrBreakoutRoom=7&requestTime=2022-01-03T00:00:00Z&explanation=dokku-issue&solved=true")
                                                 .with(csrf()))
                                 .andExpect(status().isOk()).andReturn();
 
@@ -183,7 +183,7 @@ public class HelpRequestsControllerTests extends ControllerTestCase{
         }
 
         @WithMockUser(roles = { "USER" })
-        @Test 
+        @Test
          public void test_that_logged_in_user_can_get_by_id_when_the_id_does_exist() throws Exception {
 
                 ZonedDateTime z1 = ZonedDateTime.parse("2022-01-03T00:00:00Z");
@@ -243,7 +243,7 @@ public class HelpRequestsControllerTests extends ControllerTestCase{
                         .tableOrBreakoutRoom("5")
                         .requestTime(z2)
                         .explanation("jacoco-issue")
-                        .solved(false)
+                        .solved(true)
                         .build();
 
                 
