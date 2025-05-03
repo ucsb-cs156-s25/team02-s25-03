@@ -13,7 +13,7 @@ const articlesFixtures = {
       title: "Some Article Title",
       url: "https://gmail.com",
       explanation: "The article is actually Gmail",
-      email: "karena_lai@ucsb.edu",
+      email: "karena_lai",
       dateAdded: "2022-01-02T12:00:00",
     },
     {
