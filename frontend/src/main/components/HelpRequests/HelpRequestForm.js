@@ -7,17 +7,34 @@ function HelpRequestForm({
   submitAction,
   buttonLabel = "Create",
 }) {
+  const defaultValues = initialContents
+    ? {
+        ...initialContents,
+        requestTime: initialContents.requestTime.replace("Z", ""),
+      }
+    : {};
   // Stryker disable all
   const {
     register,
     formState: { errors },
     handleSubmit,
-  } = useForm({ defaultValues: initialContents || {} });
+  } = useForm({ defaultValues });
   // Stryker restore all
 
   const navigate = useNavigate();
 
   const testIdPrefix = "HelpRequestForm";
+
+  // For explanation, see: https://stackoverflow.com/questions/3143070/javascript-regex-iso-datetime
+  // Note that even this complex regex may still need some tweaks
+
+  // Stryker disable Regex
+  const isodate_regex =
+    /(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d:[0-5]\d\.\d+)|(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d:[0-5]\d)|(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d)/i;
+  // Stryker restore Regex
+
+  // Stryker disable next-line all
+  //const yyyyq_regex = /((19)|(20))\d{2}[1-4]/i; // Accepts from 1900-2099 followed by 1-4.  Close enough.
 
   return (
     <Form onSubmit={handleSubmit(submitAction)}>
@@ -36,7 +53,7 @@ function HelpRequestForm({
       )}
 
       <Form.Group className="mb-3">
-        <Form.Label htmlFor="requesterEmail">requester Email</Form.Label>
+        <Form.Label htmlFor="requesterEmail">requesterEmail</Form.Label>
         <Form.Control
           data-testid={testIdPrefix + "-requesterEmail"}
           id="requesterEmail"
@@ -68,6 +85,73 @@ function HelpRequestForm({
         />
         <Form.Control.Feedback type="invalid">
           {errors.teamId?.message}
+        </Form.Control.Feedback>
+      </Form.Group>
+
+      <Form.Group className="mb-3">
+        <Form.Label htmlFor="tableOrBreakoutRoom">
+          tableOrBreakoutRoom
+        </Form.Label>
+        <Form.Control
+          data-testid={testIdPrefix + "-tableOrBreakoutRoom"}
+          id="tableOrBreakoutRoom"
+          type="text"
+          isInvalid={Boolean(errors.tableOrBreakoutRoom)}
+          {...register("tableOrBreakoutRoom", {
+            required: "tableOrBreakoutRoom is required.",
+          })}
+        />
+        <Form.Control.Feedback type="invalid">
+          {errors.tableOrBreakoutRoom?.message}
+        </Form.Control.Feedback>
+      </Form.Group>
+
+      <Form.Group className="mb-3">
+        <Form.Label htmlFor="requestTime">requestTime</Form.Label>
+        <Form.Control
+          data-testid={testIdPrefix + "-requestTime"}
+          id="requestTime"
+          type="datetime-local"
+          isInvalid={Boolean(errors.requestTime)}
+          {...register("requestTime", {
+            required: true,
+            pattern: isodate_regex,
+          })}
+        />
+        <Form.Control.Feedback type="invalid">
+          {errors.requestTime && "requestTime is required. "}
+        </Form.Control.Feedback>
+      </Form.Group>
+
+      <Form.Group className="mb-3">
+        <Form.Label htmlFor="explanation">explanation</Form.Label>
+        <Form.Control
+          data-testid={testIdPrefix + "-explanation"}
+          id="explanation"
+          type="text"
+          isInvalid={Boolean(errors.explanation)}
+          {...register("explanation", {
+            required: "explanation is required.",
+          })}
+        />
+        <Form.Control.Feedback type="invalid">
+          {errors.explanation?.message}
+        </Form.Control.Feedback>
+      </Form.Group>
+
+      <Form.Group className="mb-3">
+        <Form.Check
+          type="checkbox"
+          id="solved"
+          label="solved"
+          data-testid={testIdPrefix + "-solved"}
+          isInvalid={Boolean(errors.solved)}
+          {...register("solved", {
+            validate: (value) => value === true || "solved is required.",
+          })}
+        />
+        <Form.Control.Feedback type="invalid">
+          {errors.solved?.message}
         </Form.Control.Feedback>
       </Form.Group>
 
