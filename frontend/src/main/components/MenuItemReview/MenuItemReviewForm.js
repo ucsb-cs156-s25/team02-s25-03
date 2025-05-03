@@ -19,6 +19,14 @@ function MenuItemReviewForm({
 
   const testIdPrefix = "MenuItemReviewForm";
 
+  // For explanation, see: https://stackoverflow.com/questions/3143070/javascript-regex-iso-datetime
+  // Note that even this complex regex may still need some tweaks
+
+  // Stryker disable Regex
+  const isodate_regex =
+    /(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d:[0-5]\d\.\d+)|(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d:[0-5]\d)|(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d)/i;
+  // Stryker restore Regex
+
   return (
     <Form onSubmit={handleSubmit(submitAction)}>
       {initialContents && (
@@ -63,13 +71,46 @@ function MenuItemReviewForm({
           type="text"
           isInvalid={Boolean(errors.reviewerEmail)}
           {...register("reviewerEmail", {
-            required: "reviewerEmail is required.",
+            required: "Reviewer Email is required.",
           })}
         />
         <Form.Control.Feedback type="invalid">
           {errors.reviewerEmail?.message}
         </Form.Control.Feedback>
       </Form.Group>
+
+      {/* <Form.Group className="mb-3">
+        <Form.Label htmlFor="dateReviewed">Date Reviewed</Form.Label>
+        <Form.Control
+          data-testid={testIdPrefix + "-dateReviewed"}
+          id="dateReviewed"
+          type="text"
+          isInvalid={Boolean(errors.dateReviewed)}
+          {...register("dateReviewed", {
+            required: "Date Reviewed is required.",
+          })}
+        />
+        <Form.Control.Feedback type="invalid">
+          {errors.dateReviewed?.message}
+        </Form.Control.Feedback>
+      </Form.Group> */}
+
+      <Form.Group className="mb-3">
+            <Form.Label htmlFor="dateReviewed">Date Reviewed (iso format)</Form.Label>
+            <Form.Control
+              data-testid={testIdPrefix + "-dateReviewed"}
+              id="dateReviewed"
+              type="datetime-local"
+              isInvalid={Boolean(errors.dateReviewed)}
+              {...register("dateReviewed", {
+                required: true,
+                pattern: isodate_regex,
+              })}
+            />
+            <Form.Control.Feedback type="invalid">
+              {errors.dateReviewed && "Date Reviewed is required. "}
+            </Form.Control.Feedback>
+          </Form.Group>
 
       <Button type="submit" data-testid={testIdPrefix + "-submit"}>
         {buttonLabel}
