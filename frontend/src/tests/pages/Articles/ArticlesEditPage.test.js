@@ -135,7 +135,7 @@ describe("ArticlesEditPage tests", () => {
       expect(emailField).toHaveValue("karena_lai@ucsb.edu");
 
       expect(dateAddedField).toBeInTheDocument();
-      expect(dateAddedField).toHaveValue("2022-01-02T12:00:01.000")
+      expect(dateAddedField).toHaveValue("2022-01-02T12:00:01.000");
 
       expect(submitButton).toHaveTextContent("Update");
 

@@ -36,7 +36,7 @@ export default function ArticlesEditPage({ storybook = false }) {
       url: article.url,
       explanation: article.explanation,
       email: article.email,
-      dateAdded: article.dateAdded
+      dateAdded: article.dateAdded,
     },
   });
 
