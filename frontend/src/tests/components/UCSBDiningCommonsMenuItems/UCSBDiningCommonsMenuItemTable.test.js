@@ -188,7 +188,7 @@ describe("UCSBDiningCommonsMenuItemTable tests", () => {
     // assert - check that the navigate function was called with the expected path
     await waitFor(() =>
       expect(mockedNavigate).toHaveBeenCalledWith(
-        "/UCSBDiningCommonsMenuItems/edit/1",
+        "/diningcommonsmenuitem/edit/1",
       ),
     );
   });
