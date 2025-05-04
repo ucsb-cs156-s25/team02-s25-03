@@ -26,7 +26,9 @@ Default.parameters = {
       });
     }),
     http.post("/api/recommendationrequest/post", () => {
-      return HttpResponse.json({}, { status: 200 });
+      return HttpResponse.json(RecommendationRequest.oneCommit, {
+        status: 200,
+      });
     }),
   ],
 };
