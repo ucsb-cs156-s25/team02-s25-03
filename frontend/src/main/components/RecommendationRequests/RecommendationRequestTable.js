@@ -12,12 +12,12 @@ import { hasRole } from "main/utils/currentUser";
 export default function RecommendationRequestTable({
   recommendationrequests,
   currentUser,
-  testIdPrefix = "RecommendationRequestTable",
+  testIDPrefix = "RecommendationRequestTable",
 }) {
   const navigate = useNavigate();
 
   const editCallback = (cell) => {
-    navigate(`/recommendationrequests/edit/${cell.row.values.id}`);
+    navigate(`/recommendationRequest/edit/${cell.row.values.id}`);
   };
 
   // Stryker disable all : hard to test for query caching
@@ -25,7 +25,7 @@ export default function RecommendationRequestTable({
   const deleteMutation = useBackendMutation(
     cellToAxiosParamsDelete,
     { onSuccess: onDeleteSuccess },
-    ["/api/recommendationrequest/all"],
+    ["/api/recommendationRequest/all"],
   );
   // Stryker restore all
 
@@ -67,9 +67,9 @@ export default function RecommendationRequestTable({
   ];
 
   if (hasRole(currentUser, "ROLE_ADMIN")) {
-    columns.push(ButtonColumn("Edit", "primary", editCallback, testIdPrefix));
+    columns.push(ButtonColumn("Edit", "primary", editCallback, testIDPrefix));
     columns.push(
-      ButtonColumn("Delete", "danger", deleteCallback, testIdPrefix),
+      ButtonColumn("Delete", "danger", deleteCallback, testIDPrefix),
     );
   }
 
@@ -77,7 +77,7 @@ export default function RecommendationRequestTable({
     <OurTable
       data={recommendationrequests}
       columns={columns}
-      testid={testIdPrefix}
+      testid={testIDPrefix}
     />
   );
 }
