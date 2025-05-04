@@ -44,6 +44,38 @@ function MenuItemReviewForm({
       )}
 
       <Form.Group className="mb-3">
+        <Form.Label htmlFor="reviewerEmail">Reviewer Email</Form.Label>
+        <Form.Control
+          data-testid={testIdPrefix + "-reviewerEmail"}
+          id="reviewerEmail"
+          type="text"
+          isInvalid={Boolean(errors.reviewerEmail)}
+          {...register("reviewerEmail", {
+            required: "Reviewer Email is required.",
+          })}
+        />
+        <Form.Control.Feedback type="invalid">
+          {errors.reviewerEmail?.message}
+        </Form.Control.Feedback>
+      </Form.Group>
+
+      <Form.Group className="mb-3">
+        <Form.Label htmlFor="itemId">Item ID</Form.Label>
+        <Form.Control
+          data-testid={testIdPrefix + "-itemId"}
+          id="itemId"
+          type="number"
+          isInvalid={Boolean(errors.itemId)}
+          {...register("itemId", {
+            required: "Item ID is required.",
+          })}
+        />
+        <Form.Control.Feedback type="invalid">
+          {errors.itemId?.message}
+        </Form.Control.Feedback>
+      </Form.Group>
+
+      <Form.Group className="mb-3">
         <Form.Label htmlFor="comments">Comments</Form.Label>
         <Form.Control
           data-testid={testIdPrefix + "-comments"}
@@ -64,53 +96,23 @@ function MenuItemReviewForm({
       </Form.Group>
 
       <Form.Group className="mb-3">
-        <Form.Label htmlFor="reviewerEmail">Reviewer Email</Form.Label>
-        <Form.Control
-          data-testid={testIdPrefix + "-reviewerEmail"}
-          id="reviewerEmail"
-          type="text"
-          isInvalid={Boolean(errors.reviewerEmail)}
-          {...register("reviewerEmail", {
-            required: "Reviewer Email is required.",
-          })}
-        />
-        <Form.Control.Feedback type="invalid">
-          {errors.reviewerEmail?.message}
-        </Form.Control.Feedback>
-      </Form.Group>
-
-      {/* <Form.Group className="mb-3">
-        <Form.Label htmlFor="dateReviewed">Date Reviewed</Form.Label>
+        <Form.Label htmlFor="dateReviewed">
+          Date Reviewed (iso format)
+        </Form.Label>
         <Form.Control
           data-testid={testIdPrefix + "-dateReviewed"}
           id="dateReviewed"
-          type="text"
+          type="datetime-local"
           isInvalid={Boolean(errors.dateReviewed)}
           {...register("dateReviewed", {
-            required: "Date Reviewed is required.",
+            required: true,
+            pattern: isodate_regex,
           })}
         />
         <Form.Control.Feedback type="invalid">
-          {errors.dateReviewed?.message}
+          {errors.dateReviewed && "Date Reviewed is required. "}
         </Form.Control.Feedback>
-      </Form.Group> */}
-
-      <Form.Group className="mb-3">
-            <Form.Label htmlFor="dateReviewed">Date Reviewed (iso format)</Form.Label>
-            <Form.Control
-              data-testid={testIdPrefix + "-dateReviewed"}
-              id="dateReviewed"
-              type="datetime-local"
-              isInvalid={Boolean(errors.dateReviewed)}
-              {...register("dateReviewed", {
-                required: true,
-                pattern: isodate_regex,
-              })}
-            />
-            <Form.Control.Feedback type="invalid">
-              {errors.dateReviewed && "Date Reviewed is required. "}
-            </Form.Control.Feedback>
-          </Form.Group>
+      </Form.Group>
 
       <Button type="submit" data-testid={testIdPrefix + "-submit"}>
         {buttonLabel}
