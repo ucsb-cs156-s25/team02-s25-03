@@ -49,14 +49,14 @@ function RecommendationRequestForm({
       )}
 
       <Form.Group className="mb-3">
-        <Form.Label htmlFor="requestorEmail">Requestor Email</Form.Label>
+        <Form.Label htmlFor="requesterEmail">Requester Email</Form.Label>
         <Form.Control
-          data-testid={testIdPrefix + "-requestorEmail"}
-          id="requestorEmail"
+          data-testid={testIdPrefix + "-requesterEmail"}
+          id="requesterEmail"
           type="text"
-          isInvalid={Boolean(errors.requestorEmail)}
-          {...register("requestorEmail", {
-            required: "Requestor Email is required.",
+          isInvalid={Boolean(errors.requesterEmail)}
+          {...register("requesterEmail", {
+            required: "Requester Email is required.",
             maxLength: {
               value: 255,
               message: "Max length 255 characters",
@@ -64,7 +64,7 @@ function RecommendationRequestForm({
           })}
         />
         <Form.Control.Feedback type="invalid">
-          {errors.requestorEmail?.message}
+          {errors.requesterEmail?.message}
         </Form.Control.Feedback>
       </Form.Group>
 
