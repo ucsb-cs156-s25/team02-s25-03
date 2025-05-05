@@ -55,6 +55,7 @@ public class MenuItemReviewController extends ApiController {
     /**
      * Create a new menu item review
      * 
+     * @param itemId
      * @param reviewerEmail
      * @param stars the integer (from 0 to 5) of stars given by the reviewer
      * @param dateReviewed the timestamp on the review without time zone information
