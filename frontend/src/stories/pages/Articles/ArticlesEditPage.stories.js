@@ -34,9 +34,8 @@ Default.parameters = {
     http.put("/api/articles", () => {
       return HttpResponse.json({}, { status: 200 });
     }),
-    http.put("/api/articles", (req) => {
-      window.alert("PUT: " + req.url + " and body: " + req.body);
-      return HttpResponse.json({}, { status: 200 });
+    http.put("/api/articles", () => {
+      return HttpResponse.json(articlesFixtures.oneArticle, { status: 200 });
     }),
   ],
 };
