@@ -32,7 +32,7 @@ export default function RecommendationRequestEditPage({ storybook = false }) {
       id: recommendationRequest.id,
     },
     data: {
-      requestorEmail: recommendationRequest.requestorEmail,
+      requesterEmail: recommendationRequest.requesterEmail,
       professorEmail: recommendationRequest.professorEmail,
       dateRequested: recommendationRequest.dateRequested,
       dateNeeded: recommendationRequest.dateNeeded,
@@ -43,7 +43,7 @@ export default function RecommendationRequestEditPage({ storybook = false }) {
 
   const onSuccess = (recommendationRequest) => {
     toast(
-      `RecommendationRequest Updated - id: ${recommendationRequest.id} requestorEmail: ${recommendationRequest.requestorEmail}`,
+      `RecommendationRequest Updated - id: ${recommendationRequest.id} requesterEmail: ${recommendationRequest.requesterEmail}`,
     );
   };
 
