@@ -41,8 +41,8 @@ export default function RecommendationRequestTable({
     },
 
     {
-      Header: "Requestor Email",
-      accessor: "requestorEmail",
+      Header: "Requester Email",
+      accessor: "requesterEmail",
     },
     {
       Header: "Professor Email",

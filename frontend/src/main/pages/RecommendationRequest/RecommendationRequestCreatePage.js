@@ -9,7 +9,7 @@ export default function RecommendationRequestCreatePage({ storybook = false }) {
     url: "/api/recommendationRequest/post",
     method: "POST",
     params: {
-      requestorEmail: recommendationRequest.requestorEmail,
+      requesterEmail: recommendationRequest.requesterEmail,
       professorEmail: recommendationRequest.professorEmail,
       explanation: recommendationRequest.explanation,
       dateRequested: recommendationRequest.dateRequested,
@@ -20,7 +20,7 @@ export default function RecommendationRequestCreatePage({ storybook = false }) {
 
   const onSuccess = (recommendationRequest) => {
     toast(
-      `New recommendationRequest Created - id: ${recommendationRequest.id} requestorEmail: ${recommendationRequest.requestorEmail}`,
+      `New recommendationRequest Created - id: ${recommendationRequest.id} requesterEmail: ${recommendationRequest.requesterEmail}`,
     );
   };
 
