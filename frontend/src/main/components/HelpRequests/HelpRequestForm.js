@@ -2,6 +2,18 @@ import { Button, Form } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 
+
+export function removeZ(myString) {
+  if (typeof myString !== "string") return myString;
+  return myString.replace("Z", "");
+}
+
+
+
+
+
+
+
 function HelpRequestForm({
   initialContents,
   submitAction,
@@ -10,7 +22,7 @@ function HelpRequestForm({
   const defaultValues = initialContents
     ? {
         ...initialContents,
-        requestTime: initialContents.requestTime.replace("Z", ""),
+        requestTime: removeZ(initialContents.requestTime),
       }
     : {};
   // Stryker disable all
@@ -55,16 +67,16 @@ function HelpRequestForm({
       <Form.Group className="mb-3">
         <Form.Label htmlFor="requesterEmail">requesterEmail</Form.Label>
         <Form.Control
-          data-testid={testIdPrefix + "-requesterEmail"}
+          //data-testid={testIdPrefix + "-requesterEmail"}
           id="requesterEmail"
           type="text"
           isInvalid={Boolean(errors.requesterEmail)}
           {...register("requesterEmail", {
             required: "requesterEmail is required.",
-            maxLength: {
-              value: 30,
-              message: "Max length 30 characters",
-            },
+            // maxLength: {
+            //   value: 30,
+            //   message: "Max length 30 characters",
+            // },
           })}
         />
         <Form.Control.Feedback type="invalid">
@@ -75,7 +87,7 @@ function HelpRequestForm({
       <Form.Group className="mb-3">
         <Form.Label htmlFor="teamId">teamId</Form.Label>
         <Form.Control
-          data-testid={testIdPrefix + "-teamId"}
+          //data-testid={testIdPrefix + "-teamId"}
           id="teamId"
           type="text"
           isInvalid={Boolean(errors.teamId)}
@@ -93,7 +105,7 @@ function HelpRequestForm({
           tableOrBreakoutRoom
         </Form.Label>
         <Form.Control
-          data-testid={testIdPrefix + "-tableOrBreakoutRoom"}
+          //data-testid={testIdPrefix + "-tableOrBreakoutRoom"}
           id="tableOrBreakoutRoom"
           type="text"
           isInvalid={Boolean(errors.tableOrBreakoutRoom)}
@@ -109,7 +121,7 @@ function HelpRequestForm({
       <Form.Group className="mb-3">
         <Form.Label htmlFor="requestTime">requestTime</Form.Label>
         <Form.Control
-          data-testid={testIdPrefix + "-requestTime"}
+          //data-testid={testIdPrefix + "-requestTime"}
           id="requestTime"
           type="datetime-local"
           isInvalid={Boolean(errors.requestTime)}
@@ -126,7 +138,7 @@ function HelpRequestForm({
       <Form.Group className="mb-3">
         <Form.Label htmlFor="explanation">explanation</Form.Label>
         <Form.Control
-          data-testid={testIdPrefix + "-explanation"}
+          //data-testid={testIdPrefix + "-explanation"}
           id="explanation"
           type="text"
           isInvalid={Boolean(errors.explanation)}
@@ -144,10 +156,11 @@ function HelpRequestForm({
           type="checkbox"
           id="solved"
           label="solved"
-          data-testid={testIdPrefix + "-solved"}
+          //data-testid={testIdPrefix + "-solved"}
           isInvalid={Boolean(errors.solved)}
           {...register("solved", {
-            validate: (value) => value === true || "solved is required.",
+            validate: (value) => value === true || "solved is required."
+            
           })}
         />
         <Form.Control.Feedback type="invalid">
@@ -155,7 +168,7 @@ function HelpRequestForm({
         </Form.Control.Feedback>
       </Form.Group>
 
-      <Button type="submit" data-testid={testIdPrefix + "-submit"}>
+      <Button type="submit">
         {buttonLabel}
       </Button>
       <Button
