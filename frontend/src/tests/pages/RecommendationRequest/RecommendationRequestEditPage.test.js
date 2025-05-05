@@ -67,7 +67,7 @@ describe("RecommendationRequestEditPage tests", () => {
       );
       await screen.findByText("Edit Recommendation Request");
       expect(
-        screen.queryByTestId("RecommendationRequestForm-requestorEmail"),
+        screen.queryByTestId("RecommendationRequestForm-requesterEmail"),
       ).not.toBeInTheDocument();
       restoreConsole();
     });
@@ -89,7 +89,7 @@ describe("RecommendationRequestEditPage tests", () => {
         .onGet("/api/recommendationRequest", { params: { id: 1 } })
         .reply(200, {
           id: 1,
-          requestorEmail: "requestor@gmail.com",
+          requesterEmail: "requestor@gmail.com",
           professorEmail: "professor@gmail.com",
           dateRequested: "2022-03-14T15:00",
           dateNeeded: "2022-03-14T15:00",
@@ -98,7 +98,7 @@ describe("RecommendationRequestEditPage tests", () => {
         });
       axiosMock.onPut("/api/recommendationRequest").reply(200, {
         id: "1",
-        requestorEmail: "requestor2@gmail.com",
+        requesterEmail: "requester2@gmail.com",
         professorEmail: "professor2@gmail.com",
         dateRequested: "2022-03-14T15:00",
         dateNeeded: "2022-03-14T15:00",
@@ -117,7 +117,7 @@ describe("RecommendationRequestEditPage tests", () => {
         </QueryClientProvider>,
       );
 
-      await screen.findByTestId("RecommendationRequestForm-requestorEmail");
+      await screen.findByTestId("RecommendationRequestForm-requesterEmail");
     });
 
     test("Is populated with the data provided", async () => {
@@ -129,11 +129,11 @@ describe("RecommendationRequestEditPage tests", () => {
         </QueryClientProvider>,
       );
 
-      await screen.findByTestId("RecommendationRequestForm-requestorEmail");
+      await screen.findByTestId("RecommendationRequestForm-requesterEmail");
 
       const idField = screen.getByTestId("RecommendationRequestForm-id");
       const requestorEmailField = screen.getByTestId(
-        "RecommendationRequestForm-requestorEmail",
+        "RecommendationRequestForm-requesterEmail",
       );
       const professorEmailField = screen.getByTestId(
         "RecommendationRequestForm-professorEmail",
@@ -160,6 +160,7 @@ describe("RecommendationRequestEditPage tests", () => {
       expect(explanationField).toHaveValue("explanation");
       expect(doneField).toHaveValue("false");
       expect(submitButton).toBeInTheDocument();
+      expect(submitButton).toHaveTextContent("Update");
     });
 
     test("Changes when you click Update", async () => {
@@ -171,11 +172,11 @@ describe("RecommendationRequestEditPage tests", () => {
         </QueryClientProvider>,
       );
 
-      await screen.findByTestId("RecommendationRequestForm-requestorEmail");
+      await screen.findByTestId("RecommendationRequestForm-requesterEmail");
 
       const idField = screen.getByTestId("RecommendationRequestForm-id");
       const requestorEmailField = screen.getByTestId(
-        "RecommendationRequestForm-requestorEmail",
+        "RecommendationRequestForm-requesterEmail",
       );
       const professorEmailField = screen.getByTestId(
         "RecommendationRequestForm-professorEmail",
@@ -223,7 +224,7 @@ describe("RecommendationRequestEditPage tests", () => {
 
       await waitFor(() => expect(mockToast).toBeCalled());
       expect(mockToast).toBeCalledWith(
-        "RecommendationRequest Updated - id: 1 requestorEmail: requestor2@gmail.com",
+        "RecommendationRequest Updated - id: 1 requesterEmail: requester2@gmail.com",
       );
       expect(mockNavigate).toBeCalledWith({ to: "/recommendationRequest" });
 
@@ -231,7 +232,7 @@ describe("RecommendationRequestEditPage tests", () => {
       expect(axiosMock.history.put[0].params).toEqual({ id: 1 });
       expect(axiosMock.history.put[0].data).toBe(
         JSON.stringify({
-          requestorEmail: "requestor2@gmail.com",
+          requesterEmail: "requestor2@gmail.com",
           professorEmail: "professor2@gmail.com",
           dateRequested: "2022-03-14T15:00",
           dateNeeded: "2022-03-14T15:00",

@@ -72,7 +72,7 @@ export default function RecommendationRequestEditPage({ storybook = false }) {
           <RecommendationRequestForm
             initialContents={recommendationRequest}
             submitAction={onSubmit}
-            buttonLabel="Update"
+            buttonLabel={"Update"}
           />
         )}
       </div>
