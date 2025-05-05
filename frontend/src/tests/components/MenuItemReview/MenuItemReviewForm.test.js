@@ -63,12 +63,21 @@ describe("MenuItemReviewForm tests", () => {
     expect(await screen.findByTestId(`${testId}-id`)).toBeInTheDocument();
     expect(screen.getByText(`Id`)).toBeInTheDocument();
 
-
-    expect(screen.getByLabelText("Id")).toHaveValue(String(menuItemReviewFixtures.oneMenuItemReview.id));
-    expect(screen.getByLabelText("Item ID")).toHaveValue(menuItemReviewFixtures.oneMenuItemReview.itemId);
-    expect(screen.getByLabelText("Reviewer Email")).toHaveValue(menuItemReviewFixtures.oneMenuItemReview.reviewerEmail);
-    expect(screen.getByLabelText("Stars")).toHaveValue(menuItemReviewFixtures.oneMenuItemReview.stars);
-    expect(screen.getByLabelText("Comments")).toHaveValue(menuItemReviewFixtures.oneMenuItemReview.comments);
+    expect(screen.getByLabelText("Id")).toHaveValue(
+      String(menuItemReviewFixtures.oneMenuItemReview.id),
+    );
+    expect(screen.getByLabelText("Item ID")).toHaveValue(
+      menuItemReviewFixtures.oneMenuItemReview.itemId,
+    );
+    expect(screen.getByLabelText("Reviewer Email")).toHaveValue(
+      menuItemReviewFixtures.oneMenuItemReview.reviewerEmail,
+    );
+    expect(screen.getByLabelText("Stars")).toHaveValue(
+      menuItemReviewFixtures.oneMenuItemReview.stars,
+    );
+    expect(screen.getByLabelText("Comments")).toHaveValue(
+      menuItemReviewFixtures.oneMenuItemReview.comments,
+    );
   });
 
   test("that navigate(-1) is called when Cancel is clicked", async () => {
