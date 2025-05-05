@@ -17,7 +17,7 @@ describe("RecommendationRequestForm tests", () => {
   const queryClient = new QueryClient();
 
   const expectedHeaders = [
-    "Requestor Email",
+    "Requester Email",
     "Professor Email",
     "Explanation",
     "Date Requested(in UTC)",
@@ -96,7 +96,7 @@ describe("RecommendationRequestForm tests", () => {
     const submitButton = screen.getByText(/Create/);
     fireEvent.click(submitButton);
 
-    await screen.findByText(/Requestor Email is required/);
+    await screen.findByText(/Requester Email is required/);
     expect(screen.getByText(/Professor Email is required/)).toBeInTheDocument();
     expect(screen.getByText(/Explanation is required/)).toBeInTheDocument();
     expect(screen.getByText(/Date Requested is required/)).toBeInTheDocument();
@@ -132,7 +132,7 @@ describe("RecommendationRequestForm tests", () => {
     ).toBeInTheDocument();
   });
 
-  test("shows maxLength error when Requestor Email >255 chars", async () => {
+  test("shows maxLength error when Requester Email >255 chars", async () => {
     render(
       <QueryClientProvider client={queryClient}>
         <Router>
@@ -141,8 +141,8 @@ describe("RecommendationRequestForm tests", () => {
       </QueryClientProvider>,
     );
 
-    const requestorEmailInput = screen.getByLabelText(/Requestor Email/i);
-    fireEvent.change(requestorEmailInput, {
+    const requesterEmailInput = screen.getByLabelText(/Requester Email/i);
+    fireEvent.change(requesterEmailInput, {
       target: { value: "a".repeat(256) },
     });
     fireEvent.click(screen.getByText(/Create/));

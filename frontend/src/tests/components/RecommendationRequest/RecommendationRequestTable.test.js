@@ -19,7 +19,7 @@ describe("RecommendationRequestTable tests", () => {
 
   const expectedHeaders = [
     "id",
-    "Requestor Email",
+    "Requester Email",
     "Professor Email",
     "Explanation",
     "Date Requested",
@@ -28,7 +28,7 @@ describe("RecommendationRequestTable tests", () => {
   ];
   const expectedFields = [
     "id",
-    "requestorEmail",
+    "requesterEmail",
     "professorEmail",
     "explanation",
     "dateRequested",
@@ -100,7 +100,7 @@ describe("RecommendationRequestTable tests", () => {
       "2",
     );
     expect(
-      screen.getByTestId(`${testId}-cell-row-0-col-requestorEmail`),
+      screen.getByTestId(`${testId}-cell-row-0-col-requesterEmail`),
     ).toHaveTextContent("wanqian@ucsb.edu");
 
     expect(screen.getByTestId(`${testId}-cell-row-1-col-id`)).toHaveTextContent(
@@ -156,7 +156,7 @@ describe("RecommendationRequestTable tests", () => {
       "2",
     );
     expect(
-      screen.getByTestId(`${testId}-cell-row-0-col-requestorEmail`),
+      screen.getByTestId(`${testId}-cell-row-0-col-requesterEmail`),
     ).toHaveTextContent("wanqian@ucsb.edu");
 
     expect(screen.getByTestId(`${testId}-cell-row-1-col-id`)).toHaveTextContent(
@@ -204,7 +204,7 @@ describe("RecommendationRequestTable tests", () => {
     // assert - check that the navigate function was called with the expected path
     await waitFor(() =>
       expect(mockedNavigate).toHaveBeenCalledWith(
-        "/recommendationrequests/edit/2",
+        "/recommendationRequest/edit/2",
       ),
     );
   });
@@ -215,7 +215,7 @@ describe("RecommendationRequestTable tests", () => {
 
     const axiosMock = new AxiosMockAdapter(axios);
     axiosMock
-      .onDelete("/api/recommendationrequest")
+      .onDelete("/api/recommendationRequest")
       .reply(200, { message: "Recommendation request deleted" });
 
     // act - render the component
