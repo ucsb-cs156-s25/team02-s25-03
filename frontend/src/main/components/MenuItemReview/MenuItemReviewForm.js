@@ -46,7 +46,6 @@ function MenuItemReviewForm({
       <Form.Group className="mb-3">
         <Form.Label htmlFor="itemId">Item ID</Form.Label>
         <Form.Control
-          data-testid={testIdPrefix + "-itemId"}
           id="itemId"
           type="number"
           isInvalid={Boolean(errors.itemId)}
@@ -62,7 +61,6 @@ function MenuItemReviewForm({
       <Form.Group className="mb-3">
         <Form.Label htmlFor="reviewerEmail">Reviewer Email</Form.Label>
         <Form.Control
-          data-testid={testIdPrefix + "-reviewerEmail"}
           id="reviewerEmail"
           type="text"
           isInvalid={Boolean(errors.reviewerEmail)}
@@ -78,7 +76,6 @@ function MenuItemReviewForm({
       <Form.Group className="mb-3">
         <Form.Label htmlFor="stars">Stars</Form.Label>
         <Form.Control
-          data-testid={testIdPrefix + "-stars"}
           id="stars"
           type="number"
           isInvalid={Boolean(errors.itemId)}
@@ -96,7 +93,6 @@ function MenuItemReviewForm({
           Date Reviewed (iso format)
         </Form.Label>
         <Form.Control
-          data-testid={testIdPrefix + "-dateReviewed"}
           id="dateReviewed"
           type="datetime-local"
           isInvalid={Boolean(errors.dateReviewed)}
@@ -130,7 +126,7 @@ function MenuItemReviewForm({
         </Form.Control.Feedback>
       </Form.Group>
 
-      <Button type="submit" data-testid={testIdPrefix + "-submit"}>
+      <Button type="submit">
         {buttonLabel}
       </Button>
       <Button
