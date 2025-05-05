@@ -44,6 +44,22 @@ function MenuItemReviewForm({
       )}
 
       <Form.Group className="mb-3">
+        <Form.Label htmlFor="itemId">Item ID</Form.Label>
+        <Form.Control
+          data-testid={testIdPrefix + "-itemId"}
+          id="itemId"
+          type="number"
+          isInvalid={Boolean(errors.itemId)}
+          {...register("itemId", {
+            required: "Item ID is required.",
+          })}
+        />
+        <Form.Control.Feedback type="invalid">
+          {errors.itemId?.message}
+        </Form.Control.Feedback>
+      </Form.Group>
+
+      <Form.Group className="mb-3">
         <Form.Label htmlFor="reviewerEmail">Reviewer Email</Form.Label>
         <Form.Control
           data-testid={testIdPrefix + "-reviewerEmail"}
@@ -60,18 +76,37 @@ function MenuItemReviewForm({
       </Form.Group>
 
       <Form.Group className="mb-3">
-        <Form.Label htmlFor="itemId">Item ID</Form.Label>
+        <Form.Label htmlFor="stars">Stars</Form.Label>
         <Form.Control
-          data-testid={testIdPrefix + "-itemId"}
-          id="itemId"
+          data-testid={testIdPrefix + "-stars"}
+          id="stars"
           type="number"
           isInvalid={Boolean(errors.itemId)}
-          {...register("itemId", {
-            required: "Item ID is required.",
+          {...register("stars", {
+            required: "Stars are required.",
           })}
         />
         <Form.Control.Feedback type="invalid">
-          {errors.itemId?.message}
+          {errors.stars?.message}
+        </Form.Control.Feedback>
+      </Form.Group>
+
+      <Form.Group className="mb-3">
+        <Form.Label htmlFor="dateReviewed">
+          Date Reviewed (iso format)
+        </Form.Label>
+        <Form.Control
+          data-testid={testIdPrefix + "-dateReviewed"}
+          id="dateReviewed"
+          type="datetime-local"
+          isInvalid={Boolean(errors.dateReviewed)}
+          {...register("dateReviewed", {
+            required: true,
+            pattern: isodate_regex,
+          })}
+        />
+        <Form.Control.Feedback type="invalid">
+          {errors.dateReviewed && "Date Reviewed is required. "}
         </Form.Control.Feedback>
       </Form.Group>
 
@@ -92,25 +127,6 @@ function MenuItemReviewForm({
         />
         <Form.Control.Feedback type="invalid">
           {errors.comments?.message}
-        </Form.Control.Feedback>
-      </Form.Group>
-
-      <Form.Group className="mb-3">
-        <Form.Label htmlFor="dateReviewed">
-          Date Reviewed (iso format)
-        </Form.Label>
-        <Form.Control
-          data-testid={testIdPrefix + "-dateReviewed"}
-          id="dateReviewed"
-          type="datetime-local"
-          isInvalid={Boolean(errors.dateReviewed)}
-          {...register("dateReviewed", {
-            required: true,
-            pattern: isodate_regex,
-          })}
-        />
-        <Form.Control.Feedback type="invalid">
-          {errors.dateReviewed && "Date Reviewed is required. "}
         </Form.Control.Feedback>
       </Form.Group>
 
