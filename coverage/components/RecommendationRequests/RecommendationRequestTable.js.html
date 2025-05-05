@@ -162,15 +162,15 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">14x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">14x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">14x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -178,19 +178,11 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">6x</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">14x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">6x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">14x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -214,14 +206,22 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">6x</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">14x</span>
+<span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">14x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -243,12 +243,12 @@ import { hasRole } from "main/utils/currentUser";
 export default function RecommendationRequestTable({
   recommendationrequests,
   currentUser,
-  testIdPrefix = "RecommendationRequestTable",
+  testIDPrefix = "RecommendationRequestTable",
 }) {
   const navigate = useNavigate();
 &nbsp;
   const editCallback = (cell) =&gt; {
-    navigate(`/recommendationrequests/edit/${cell.row.values.id}`);
+    navigate(`/recommendationRequest/edit/${cell.row.values.id}`);
   };
 &nbsp;
   // Stryker disable all : hard to test for query caching
@@ -256,7 +256,7 @@ export default function RecommendationRequestTable({
   const deleteMutation = useBackendMutation(
     cellToAxiosParamsDelete,
     { onSuccess: onDeleteSuccess },
-    ["/api/recommendationrequest/all"],
+    ["/api/recommendationRequest/all"],
   );
   // Stryker restore all
 &nbsp;
@@ -272,8 +272,8 @@ export default function RecommendationRequestTable({
     },
 &nbsp;
     {
-      Header: "Requestor Email",
-      accessor: "requestorEmail",
+      Header: "Requester Email",
+      accessor: "requesterEmail",
     },
     {
       Header: "Professor Email",
@@ -298,9 +298,9 @@ export default function RecommendationRequestTable({
   ];
 &nbsp;
   if (hasRole(currentUser, "ROLE_ADMIN")) {
-    columns.push(ButtonColumn("Edit", "primary", editCallback, testIdPrefix));
+    columns.push(ButtonColumn("Edit", "primary", editCallback, testIDPrefix));
     columns.push(
-      ButtonColumn("Delete", "danger", deleteCallback, testIdPrefix),
+      ButtonColumn("Delete", "danger", deleteCallback, testIDPrefix),
     );
   }
 &nbsp;
@@ -308,7 +308,7 @@ export default function RecommendationRequestTable({
     &lt;OurTable
       data={recommendationrequests}
       columns={columns}
-      testid={testIdPrefix}
+      testid={testIDPrefix}
     /&gt;
   );
 }
@@ -319,7 +319,7 @@ export default function RecommendationRequestTable({
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-05-05T21:31:30.909Z
+                at 2025-05-05T22:34:00.166Z
             </div>
         <script src="../../prettify.js"></script>
         <script>
