@@ -1,7 +1,7 @@
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { BrowserRouter as Router } from "react-router-dom";
 
-import HelpRequestForm from "main/components/HelpRequests/HelpRequestForm";
+import HelpRequestForm, {removeZ} from "main/components/HelpRequests/HelpRequestForm";
 import { helpRequestFixtures } from "fixtures/helpRequestsFixtures";
 
 import { QueryClient, QueryClientProvider } from "react-query";
@@ -26,6 +26,66 @@ describe("HelpRequestForm tests", () => {
     "Solved",
   ];
   const testId = "HelpRequestForm";
+
+
+
+
+
+  test("should not show error when 'solved' checkbox is checked", async () => {
+    render(
+      <QueryClientProvider client={queryClient}>
+        <Router>
+          <HelpRequestForm />
+        </Router>
+      </QueryClientProvider>
+    );
+  
+    const checkbox = screen.getByLabelText("solved");
+    const submitButton = screen.getByRole("button", { name: /create/i });
+  
+    // Check the checkbox
+    fireEvent.click(checkbox);
+  
+    // Submit the form
+    fireEvent.click(submitButton);
+  
+    // Assert: there should be NO validation error shown
+    const feedback = screen.queryByText("solved is required.");
+    expect(feedback).not.toBeInTheDocument();
+  });
+  
+  
+  test("should show error when 'solved' checkbox is not checked", async () => {
+    render(
+      <QueryClientProvider client={queryClient}>
+        <Router>
+          <HelpRequestForm />
+        </Router>
+      </QueryClientProvider>
+    );
+  
+    const submitButton = screen.getByRole("button", { name: /create/i });
+  
+    // Submit without checking the checkbox
+    fireEvent.click(submitButton);
+  
+    // Expect the validation message to appear
+    const errorMessage = await screen.findByText("solved is required.");
+    expect(errorMessage).toBeInTheDocument();
+  });
+  
+  
+  
+
+   
+
+
+
+  test("That the removeZ function works properly", () => {
+    expect(removeZ("ABC")).toBe("ABC");
+    expect(removeZ("ABCZ")).toBe("ABC");
+  });
+  
 
   test("renders correctly with no initialContents", async () => {
     render(

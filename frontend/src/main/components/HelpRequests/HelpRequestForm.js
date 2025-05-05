@@ -15,6 +15,7 @@ function HelpRequestForm({
     ? {
         ...initialContents,
         requestTime: removeZ(initialContents.requestTime),
+        requestTime: removeZ(initialContents.requestTime),
       }
     : {};
   // Stryker disable all
