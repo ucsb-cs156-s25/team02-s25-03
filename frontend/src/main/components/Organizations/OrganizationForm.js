@@ -84,7 +84,7 @@ function OrganizationForm({
       </Form.Group>
 
       <Form.Group className="mb-3">
-        <Form.Label htmlFor="inactive">Is Inactive?</Form.Label>
+        <Form.Label htmlFor="inactive">Inactive</Form.Label>
         <Form.Control
           data-testid={testIdPrefix + "-inactive"}
           id="inactive"
@@ -92,6 +92,12 @@ function OrganizationForm({
           isInvalid={Boolean(errors.inactive)}
           {...register("inactive", {
             required: "inactive is required.",
+            validate: (value) => {
+              if (value !== "true" && value !== "false") {
+                return "inactive must be true or false";
+              }
+              return true;
+            },
           })}
         />
         <Form.Control.Feedback type="invalid">
