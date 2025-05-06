@@ -132,7 +132,7 @@ function App() {
             />
           </>
         )}
-        
+
         {hasRole(currentUser, "ROLE_USER") && (
           <>
             <Route
