@@ -45,7 +45,9 @@ describe("OrganizationForm tests", () => {
     render(
       <QueryClientProvider client={queryClient}>
         <Router>
-          <OrganizationForm initialContents={organizationFixtures.oneOrganization} />
+          <OrganizationForm
+            initialContents={organizationFixtures.oneOrganization}
+          />
         </Router>
       </QueryClientProvider>,
     );
@@ -91,10 +93,13 @@ describe("OrganizationForm tests", () => {
     fireEvent.click(submitButton);
 
     await screen.findByText(/Organization ID is required/);
-    expect(screen.getByText(/Organization Translation Short is required/)).toBeInTheDocument();
-    expect(screen.getByText(/Organization Translation is required/)).toBeInTheDocument();
+    expect(
+      screen.getByText(/Organization Translation Short is required/),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText(/Organization Translation is required/),
+    ).toBeInTheDocument();
     expect(screen.getByText(/Inactive is required/)).toBeInTheDocument();
-
 
     const orgCode = screen.getByTestId(`${testId}-orgCode`);
     fireEvent.change(orgCode, { target: { value: "a".repeat(6) } });
@@ -104,8 +109,12 @@ describe("OrganizationForm tests", () => {
       expect(screen.getByText(/Max length 5 characters/)).toBeInTheDocument();
     });
 
-    const orgTranslationShortInput = screen.getByTestId(`${testId}-orgTranslationShort`);
-    fireEvent.change(orgTranslationShortInput, { target: { value: "a".repeat(31) } });
+    const orgTranslationShortInput = screen.getByTestId(
+      `${testId}-orgTranslationShort`,
+    );
+    fireEvent.change(orgTranslationShortInput, {
+      target: { value: "a".repeat(31) },
+    });
     fireEvent.click(submitButton);
 
     await waitFor(() => {
@@ -117,7 +126,9 @@ describe("OrganizationForm tests", () => {
     fireEvent.click(submitButton);
 
     await waitFor(() => {
-      expect(screen.getByText(/Inactive must be true or false/)).toBeInTheDocument();
+      expect(
+        screen.getByText(/Inactive must be true or false/),
+      ).toBeInTheDocument();
     });
   });
 });
