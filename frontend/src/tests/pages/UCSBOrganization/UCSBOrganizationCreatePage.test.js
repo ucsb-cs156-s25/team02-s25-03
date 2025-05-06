@@ -88,10 +88,14 @@ describe("OrganizationCreatePage tests", () => {
     const orgCodeInput = screen.getByLabelText("Organization ID");
     expect(orgCodeInput).toBeInTheDocument();
 
-    const orgTranslationShortInput = screen.getByLabelText("Organization Translation Short");
+    const orgTranslationShortInput = screen.getByLabelText(
+      "Organization Translation Short",
+    );
     expect(orgTranslationShortInput).toBeInTheDocument();
 
-    const orgTranslationInput = screen.getByLabelText("Organization Translation");
+    const orgTranslationInput = screen.getByLabelText(
+      "Organization Translation",
+    );
     expect(orgTranslationInput).toBeInTheDocument();
 
     const inactiveInput = screen.getByLabelText("Inactive");
@@ -101,8 +105,12 @@ describe("OrganizationCreatePage tests", () => {
     expect(createButton).toBeInTheDocument();
 
     fireEvent.change(orgCodeInput, { target: { value: "IEEE" } });
-    fireEvent.change(orgTranslationShortInput, { target: { value: "Engineering" } });
-    fireEvent.change(orgTranslationInput, { target: { value: "Institute of Electrical and Electronics Engineers" } });
+    fireEvent.change(orgTranslationShortInput, {
+      target: { value: "Engineering" },
+    });
+    fireEvent.change(orgTranslationInput, {
+      target: { value: "Institute of Electrical and Electronics Engineers" },
+    });
     fireEvent.change(inactiveInput, { target: { value: true } });
 
     fireEvent.click(createButton);
@@ -149,10 +157,14 @@ describe("OrganizationCreatePage tests", () => {
     const orgCodeInput = screen.getByLabelText("Organization ID");
     expect(orgCodeInput).toBeInTheDocument();
 
-    const orgTranslationShortInput = screen.getByLabelText("Organization Translation Short");
+    const orgTranslationShortInput = screen.getByLabelText(
+      "Organization Translation Short",
+    );
     expect(orgTranslationShortInput).toBeInTheDocument();
 
-    const orgTranslationInput = screen.getByLabelText("Organization Translation");
+    const orgTranslationInput = screen.getByLabelText(
+      "Organization Translation",
+    );
     expect(orgTranslationInput).toBeInTheDocument();
 
     const inactiveInput = screen.getByLabelText("Inactive");
@@ -162,8 +174,12 @@ describe("OrganizationCreatePage tests", () => {
     expect(createButton).toBeInTheDocument();
 
     fireEvent.change(orgCodeInput, { target: { value: "IEEE" } });
-    fireEvent.change(orgTranslationShortInput, { target: { value: "Engineering" } });
-    fireEvent.change(orgTranslationInput, { target: { value: "Institute of Electrical and Electronics Engineers" } });
+    fireEvent.change(orgTranslationShortInput, {
+      target: { value: "Engineering" },
+    });
+    fireEvent.change(orgTranslationInput, {
+      target: { value: "Institute of Electrical and Electronics Engineers" },
+    });
     fireEvent.change(inactiveInput, { target: { value: false } });
 
     fireEvent.click(createButton);
