@@ -30,7 +30,7 @@ function OrganizationForm({
             type="text"
             isInvalid={Boolean(errors.orgCode)}
             {...register("orgCode", {
-              required: "orgCode is required.",
+              required: "Organization ID is required.",
               maxLength: {
                 value: 5,
                 message: "Max length 5 characters",
@@ -53,7 +53,7 @@ function OrganizationForm({
           type="text"
           isInvalid={Boolean(errors.orgTranslationShort)}
           {...register("orgTranslationShort", {
-            required: "orgTranslationShort is required.",
+            required: "Organization Translation Short is required.",
             maxLength: {
               value: 30,
               message: "Max length 30 characters",
@@ -75,7 +75,7 @@ function OrganizationForm({
           type="text"
           isInvalid={Boolean(errors.orgTranslation)}
           {...register("orgTranslation", {
-            required: "orgTranslation is required.",
+            required: "Organization Translation is required.",
           })}
         />
         <Form.Control.Feedback type="invalid">
@@ -91,10 +91,10 @@ function OrganizationForm({
           type="boolean"
           isInvalid={Boolean(errors.inactive)}
           {...register("inactive", {
-            required: "inactive is required.",
+            required: "Inactive is required.",
             validate: (value) => {
               if (value !== "true" && value !== "false") {
-                return "inactive must be true or false";
+                return "Inactive must be true or false";
               }
               return true;
             },
