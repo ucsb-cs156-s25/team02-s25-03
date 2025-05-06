@@ -2,6 +2,7 @@ import { Button, Form } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 
+
 function OrganizationForm({
   initialContents,
   submitAction,
@@ -70,7 +71,6 @@ function OrganizationForm({
           Organization Translation
         </Form.Label>
         <Form.Control
-          data-testid={testIdPrefix + "-orgTranslation"}
           id="orgTranslation"
           type="text"
           isInvalid={Boolean(errors.orgTranslation)}
@@ -85,27 +85,22 @@ function OrganizationForm({
 
       <Form.Group className="mb-3">
         <Form.Label htmlFor="inactive">Inactive</Form.Label>
-        <Form.Control
-          data-testid={testIdPrefix + "-inactive"}
+        <Form.Select
           id="inactive"
-          type="boolean"
           isInvalid={Boolean(errors.inactive)}
           {...register("inactive", {
             required: "Inactive is required.",
-            validate: (value) => {
-              if (value !== "true" && value !== "false") {
-                return "Inactive must be true or false";
-              }
-              return true;
-            },
           })}
         />
+        <option value="">Select</option>
+        <option value="true">True</option>
+        <option value="false">False</option>
         <Form.Control.Feedback type="invalid">
           {errors.inactive?.message}
         </Form.Control.Feedback>
       </Form.Group>
 
-      <Button type="submit" data-testid={testIdPrefix + "-submit"}>
+      <Button type="submit">
         {buttonLabel}
       </Button>
       <Button

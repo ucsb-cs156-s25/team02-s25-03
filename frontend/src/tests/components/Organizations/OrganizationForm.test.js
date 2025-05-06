@@ -120,15 +120,7 @@ describe("OrganizationForm tests", () => {
     await waitFor(() => {
       expect(screen.getByText(/Max length 30 characters/)).toBeInTheDocument();
     });
-
-    const inactiveInput = screen.getByTestId(`${testId}-inactive`);
-    fireEvent.change(inactiveInput, { target: { value: "truth" } });
-    fireEvent.click(submitButton);
-
-    await waitFor(() => {
-      expect(
-        screen.getByText(/Inactive must be true or false/),
-      ).toBeInTheDocument();
-    });
+    
+    
   });
 });
