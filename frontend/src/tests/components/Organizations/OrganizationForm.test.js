@@ -120,7 +120,5 @@ describe("OrganizationForm tests", () => {
     await waitFor(() => {
       expect(screen.getByText(/Max length 30 characters/)).toBeInTheDocument();
     });
-    
-    
   });
 });

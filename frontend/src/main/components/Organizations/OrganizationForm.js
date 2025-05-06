@@ -2,7 +2,6 @@ import { Button, Form } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 
-
 function OrganizationForm({
   initialContents,
   submitAction,
@@ -91,18 +90,17 @@ function OrganizationForm({
           {...register("inactive", {
             required: "Inactive is required.",
           })}
-        />
-        <option value="">Select</option>
-        <option value="true">True</option>
-        <option value="false">False</option>
+        >
+          <option value="">Select</option>
+          <option value="true">True</option>
+          <option value="false">False</option>
+        </Form.Select>
         <Form.Control.Feedback type="invalid">
           {errors.inactive?.message}
         </Form.Control.Feedback>
       </Form.Group>
 
-      <Button type="submit">
-        {buttonLabel}
-      </Button>
+      <Button type="submit">{buttonLabel}</Button>
       <Button
         variant="Secondary"
         onClick={() => navigate(-1)}
