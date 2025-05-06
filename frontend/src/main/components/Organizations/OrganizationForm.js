@@ -23,28 +23,30 @@ function OrganizationForm({
     <Form onSubmit={handleSubmit(submitAction)}>
       {
         <Form.Group className="mb-3">
-        <Form.Label htmlFor="orgCode">Organization ID</Form.Label>
-        <Form.Control
-          data-testid={testIdPrefix + "-orgCode"}
-          id="orgCode"
-          type="text"
-          isInvalid={Boolean(errors.orgCode)}
-          {...register("orgCode", {
-            required: "orgCode is required.",
-            maxLength: {
-              value: 5,
-              message: "Max length 5 characters",
-            },
-          })}
-        />
-        <Form.Control.Feedback type="invalid">
-          {errors.orgCode?.message}
-        </Form.Control.Feedback>
-      </Form.Group>
+          <Form.Label htmlFor="orgCode">Organization ID</Form.Label>
+          <Form.Control
+            data-testid={testIdPrefix + "-orgCode"}
+            id="orgCode"
+            type="text"
+            isInvalid={Boolean(errors.orgCode)}
+            {...register("orgCode", {
+              required: "orgCode is required.",
+              maxLength: {
+                value: 5,
+                message: "Max length 5 characters",
+              },
+            })}
+          />
+          <Form.Control.Feedback type="invalid">
+            {errors.orgCode?.message}
+          </Form.Control.Feedback>
+        </Form.Group>
       }
 
       <Form.Group className="mb-3">
-        <Form.Label htmlFor="orgTranslationShort">Organization Translation Short</Form.Label>
+        <Form.Label htmlFor="orgTranslationShort">
+          Organization Translation Short
+        </Form.Label>
         <Form.Control
           data-testid={testIdPrefix + "-orgTranslationShort"}
           id="orgTranslationShort"
@@ -64,7 +66,9 @@ function OrganizationForm({
       </Form.Group>
 
       <Form.Group className="mb-3">
-        <Form.Label htmlFor="orgTranslation">Organization Translation</Form.Label>
+        <Form.Label htmlFor="orgTranslation">
+          Organization Translation
+        </Form.Label>
         <Form.Control
           data-testid={testIdPrefix + "-orgTranslation"}
           id="orgTranslation"
