@@ -5,15 +5,19 @@ import { useBackendMutation } from "main/utils/useBackend";
 import {
   cellToAxiosParamsDelete,
   onDeleteSuccess,
-} from "main/utils/UCSBDateUtils";
+} from "main/utils/articleUtils";
 import { useNavigate } from "react-router-dom";
 import { hasRole } from "main/utils/currentUser";
 
-export default function UCSBDatesTable({ dates, currentUser }) {
+export default function ArticlesTable({
+  articles,
+  currentUser,
+  testIdPrefix = "ArticlesTable",
+}) {
   const navigate = useNavigate();
 
   const editCallback = (cell) => {
-    navigate(`/ucsbdates/edit/${cell.row.values.id}`);
+    navigate(`/articles/edit/${cell.row.values.id}`);
   };
 
   // Stryker disable all : hard to test for query caching
@@ -21,7 +25,7 @@ export default function UCSBDatesTable({ dates, currentUser }) {
   const deleteMutation = useBackendMutation(
     cellToAxiosParamsDelete,
     { onSuccess: onDeleteSuccess },
-    ["/api/ucsbdates/all"],
+    ["/api/articles/all"],
   );
   // Stryker restore all
 
@@ -35,27 +39,35 @@ export default function UCSBDatesTable({ dates, currentUser }) {
       Header: "id",
       accessor: "id", // accessor is the "key" in the data
     },
+
     {
-      Header: "QuarterYYYYQ",
-      accessor: "quarterYYYYQ",
+      Header: "Title",
+      accessor: "title",
     },
     {
-      Header: "Name",
-      accessor: "name",
+      Header: "Url",
+      accessor: "url",
     },
     {
-      Header: "Date",
-      accessor: "localDateTime",
+      Header: "Explanation",
+      accessor: "explanation",
+    },
+    {
+      Header: "Email",
+      accessor: "email",
+    },
+    {
+      Header: "Date Added (iso format)",
+      accessor: "dateAdded",
     },
   ];
+
   if (hasRole(currentUser, "ROLE_ADMIN")) {
+    columns.push(ButtonColumn("Edit", "primary", editCallback, testIdPrefix));
     columns.push(
-      ButtonColumn("Edit", "primary", editCallback, "UCSBDatesTable"),
-    );
-    columns.push(
-      ButtonColumn("Delete", "danger", deleteCallback, "UCSBDatesTable"),
+      ButtonColumn("Delete", "danger", deleteCallback, testIdPrefix),
     );
   }
 
-  return <OurTable data={dates} columns={columns} testid={"UCSBDatesTable"} />;
+  return <OurTable data={articles} columns={columns} testid={testIdPrefix} />;
 }
