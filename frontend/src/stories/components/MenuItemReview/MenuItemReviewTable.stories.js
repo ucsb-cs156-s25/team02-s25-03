@@ -29,7 +29,7 @@ ThreeItemsOrdinaryUser.args = {
 
 export const ThreeItemsAdminUser = Template.bind({});
 ThreeItemsAdminUser.args = {
-    menuItemReviews: menuItemReviewFixtures.threeMenuItemReviews,
+  menuItemReviews: menuItemReviewFixtures.threeMenuItemReviews,
   currentUser: currentUserFixtures.adminUser,
 };
 

@@ -17,8 +17,22 @@ jest.mock("react-router-dom", () => ({
 describe("MenuItemReviewTable tests", () => {
   const queryClient = new QueryClient();
 
-  const expectedHeaders = ["id", "Item ID", "Reviewer Email", "Stars", "Date Reviewed", "Comments"];
-  const expectedFields = ["id", "itemId", "reviewerEmail", "stars", "dateReviewed", "comments"];
+  const expectedHeaders = [
+    "id",
+    "Item ID",
+    "Reviewer Email",
+    "Stars",
+    "Date Reviewed",
+    "Comments",
+  ];
+  const expectedFields = [
+    "id",
+    "itemId",
+    "reviewerEmail",
+    "stars",
+    "dateReviewed",
+    "comments",
+  ];
   const testId = "MenuItemReviewTable";
 
   test("renders empty table correctly", () => {
@@ -130,18 +144,18 @@ describe("MenuItemReviewTable tests", () => {
     });
 
     expect(screen.getByTestId(`${testId}-cell-row-0-col-id`)).toHaveTextContent(
-        "1",
-      );
-      expect(
-        screen.getByTestId(`${testId}-cell-row-0-col-comments`),
-      ).toHaveTextContent("bland af but edible I guess");
-  
-      expect(screen.getByTestId(`${testId}-cell-row-1-col-id`)).toHaveTextContent(
-        "2",
-      );
-      expect(
-        screen.getByTestId(`${testId}-cell-row-1-col-reviewerEmail`),
-      ).toHaveTextContent("cgaucho@ucsb.edu");
+      "1",
+    );
+    expect(
+      screen.getByTestId(`${testId}-cell-row-0-col-comments`),
+    ).toHaveTextContent("bland af but edible I guess");
+
+    expect(screen.getByTestId(`${testId}-cell-row-1-col-id`)).toHaveTextContent(
+      "2",
+    );
+    expect(
+      screen.getByTestId(`${testId}-cell-row-1-col-reviewerEmail`),
+    ).toHaveTextContent("cgaucho@ucsb.edu");
 
     expect(screen.queryByText("Delete")).not.toBeInTheDocument();
     expect(screen.queryByText("Edit")).not.toBeInTheDocument();
