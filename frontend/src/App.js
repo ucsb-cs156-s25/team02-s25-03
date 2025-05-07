@@ -35,14 +35,10 @@ function App() {
         {hasRole(currentUser, "ROLE_ADMIN") && (
           <Route exact path="/admin/users" element={<AdminUsersPage />} />
         )}
-        
-         {hasRole(currentUser, "ROLE_USER") && (
+
+        {hasRole(currentUser, "ROLE_USER") && (
           <>
-            <Route
-              exact
-              path="/ucsbdates"
-              element={<UCSBDatesIndexPage />}
-            />
+            <Route exact path="/ucsbdates" element={<UCSBDatesIndexPage />} />
           </>
         )}
         {hasRole(currentUser, "ROLE_ADMIN") && (
@@ -59,10 +55,6 @@ function App() {
             />
           </>
         )}
-
-
-
-
 
         {hasRole(currentUser, "ROLE_USER") && (
           <>
