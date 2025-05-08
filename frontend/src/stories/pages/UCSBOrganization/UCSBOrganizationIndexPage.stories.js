@@ -7,7 +7,7 @@ import { http, HttpResponse } from "msw";
 import UCSBOrganizationIndexPage from "main/pages/UCSBOrganization/UCSBOrganizationIndexPage";
 
 export default {
-  title: "pages/UCSBOrganizations/UCSBOrganizationIndexPage",
+  title: "pages/UCSBOrganization/UCSBOrganizationIndexPage",
   component: UCSBOrganizationIndexPage,
 };
 
