@@ -100,7 +100,7 @@ describe("MenuItemReviewEditPage tests", () => {
 
     const queryClient = new QueryClient();
 
-    test.only("Is populated with the data provided", async () => {
+    test("Is populated with the data provided, and changes when data is changed", async () => {
       render(
         <QueryClientProvider client={queryClient}>
           <MemoryRouter>
@@ -152,14 +152,14 @@ describe("MenuItemReviewEditPage tests", () => {
       fireEvent.change(dateReviewedField, {
         target: { value: "2022-10-30T00:00:02" },
       });
-      fireEvent.change(itemIdField, {
+      fireEvent.change(commentsField, {
         target: { value: "edible I guess" },
       });
       fireEvent.click(submitButton);
 
       await waitFor(() => expect(mockToast).toHaveBeenCalled());
       expect(mockToast).toHaveBeenCalledWith(
-        "Menu Item Review Updated - id: 17 reviewerEmail: cgaucho@ucsb.edu comments: bland af but edible I guess",
+        "Menu Item Review Updated - id: 17 reviewerEmail: cgaucho@ucsb.edua comments: edible I guess",
       );
 
       expect(mockNavigate).toHaveBeenCalledWith({ to: "/menuitemreview" });
@@ -168,48 +168,15 @@ describe("MenuItemReviewEditPage tests", () => {
       expect(axiosMock.history.put[0].params).toEqual({ id: 17 });
       expect(axiosMock.history.put[0].data).toBe(
         JSON.stringify({
-          itemId: 4,
+          itemId: "4",
           reviewerEmail: "cgaucho@ucsb.edua",
-          stars: 2,
+          stars: "2",
           dateReviewed: "2022-10-30T00:00:02.000",
           comments: "edible I guess",
         }),
       ); // posted object
-    });
 
-    test("Changes when you click Update", async () => {
-      render(
-        <QueryClientProvider client={queryClient}>
-          <MemoryRouter>
-            <MenuItemReviewEditPage />
-          </MemoryRouter>
-        </QueryClientProvider>,
-      );
-
-      await screen.findByTestId("MenuItemReviewForm-id");
-
-      const idField = screen.getByTestId("MenuItemReviewForm-id");
-      const nameField = screen.getByTestId("MenuItemReviewForm-name");
-      const descriptionField = screen.getByTestId("MenuItemReviewForm-description");
-      const submitButton = screen.getByTestId("MenuItemReviewForm-submit");
-
-      expect(idField).toHaveValue("17");
-      expect(nameField).toHaveValue("Freebirds");
-      expect(descriptionField).toHaveValue("Burritos");
-      expect(submitButton).toBeInTheDocument();
-
-      fireEvent.change(nameField, {
-        target: { value: "Freebirds World Burrito" },
-      });
-      fireEvent.change(descriptionField, { target: { value: "Big Burritos" } });
-
-      fireEvent.click(submitButton);
-
-      await waitFor(() => expect(mockToast).toBeCalled());
-      expect(mockToast).toHaveBeenCalledWith(
-        "Restaurant Updated - id: 17 name: Freebirds World Burrito",
-      );
       expect(mockNavigate).toHaveBeenCalledWith({ to: "/menuitemreview" });
-    });
+    });    
   });
 });
