@@ -63,7 +63,9 @@ describe("MenuItemReviewEditPage tests", () => {
         </QueryClientProvider>,
       );
       await screen.findByText("Edit Menu Item Review");
-      expect(screen.queryByTestId("MenuItemReview-reviewerEmail")).not.toBeInTheDocument();
+      expect(
+        screen.queryByTestId("MenuItemReview-reviewerEmail"),
+      ).not.toBeInTheDocument();
       restoreConsole();
     });
   });
@@ -80,16 +82,18 @@ describe("MenuItemReviewEditPage tests", () => {
       axiosMock
         .onGet("/api/systemInfo")
         .reply(200, systemInfoFixtures.showingNeither);
-      axiosMock.onGet("/api/menuitemreview", { params: { id: 17 } }).reply(200, {
-        id: 17,        
-        itemId: 27,
-        reviewerEmail: "cgaucho@ucsb.edu",
-        stars: 3,
-        dateReviewed: "2022-04-20T00:00:01",
-        comments: "bland af but edible I guess",
-      });
+      axiosMock
+        .onGet("/api/menuitemreview", { params: { id: 17 } })
+        .reply(200, {
+          id: 17,
+          itemId: 27,
+          reviewerEmail: "cgaucho@ucsb.edu",
+          stars: 3,
+          dateReviewed: "2022-04-20T00:00:01",
+          comments: "bland af but edible I guess",
+        });
       axiosMock.onPut("/api/menuitemreview").reply(200, {
-        id: 17,        
+        id: 17,
         itemId: 4,
         reviewerEmail: "cgaucho@ucsb.edua",
         stars: 2,
@@ -115,7 +119,9 @@ describe("MenuItemReviewEditPage tests", () => {
       const itemIdField = screen.getByLabelText("Item ID");
       const reviewerEmailField = screen.getByLabelText("Reviewer Email");
       const starsField = screen.getByLabelText("Stars");
-      const dateReviewedField = screen.getByLabelText("Date Reviewed (iso format)");
+      const dateReviewedField = screen.getByLabelText(
+        "Date Reviewed (iso format)",
+      );
       const commentsField = screen.getByLabelText("Comments");
 
       const submitButton = screen.getByText("Update");
@@ -177,6 +183,6 @@ describe("MenuItemReviewEditPage tests", () => {
       ); // posted object
 
       expect(mockNavigate).toHaveBeenCalledWith({ to: "/menuitemreview" });
-    });    
+    });
   });
 });
