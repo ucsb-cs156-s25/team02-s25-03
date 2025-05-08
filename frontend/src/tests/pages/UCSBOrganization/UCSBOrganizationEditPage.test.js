@@ -48,7 +48,9 @@ describe("UCSBOrganizationEditPage tests", () => {
       axiosMock
         .onGet("/api/systemInfo")
         .reply(200, systemInfoFixtures.showingNeither);
-      axiosMock.onGet("/api/ucsborganization", { params: { orgCode : "DIVE" } }).timeout();
+      axiosMock
+        .onGet("/api/ucsborganization", { params: { orgCode: "DIVE" } })
+        .timeout();
     });
 
     const queryClient = new QueryClient();
@@ -80,12 +82,14 @@ describe("UCSBOrganizationEditPage tests", () => {
       axiosMock
         .onGet("/api/systemInfo")
         .reply(200, systemInfoFixtures.showingNeither);
-      axiosMock.onGet("/api/ucsborganization", { params: { orgCode : "DIVE" } }).reply(200, {
-        orgCode: "DIVE",
-        orgTranslationShort: "Diving",
-        orgTranslation: "UCSB Diving Club",
-        inactive: false,
-      });
+      axiosMock
+        .onGet("/api/ucsborganization", { params: { orgCode: "DIVE" } })
+        .reply(200, {
+          orgCode: "DIVE",
+          orgTranslationShort: "Diving",
+          orgTranslation: "UCSB Diving Club",
+          inactive: false,
+        });
       axiosMock.onPut("/api/ucsborganization").reply(200, {
         orgCode: "DIVE",
         orgTranslationShort: "Diving Club",
@@ -108,8 +112,12 @@ describe("UCSBOrganizationEditPage tests", () => {
       await screen.findByTestId("OrganizationForm-orgCode");
 
       const orgCodeField = screen.getByTestId("OrganizationForm-orgCode");
-      const orgTranslationShortField = screen.getByTestId("OrganizationForm-orgTranslationShort");
-      const orgTranslationField = screen.getByTestId("OrganizationForm-orgTranslation");
+      const orgTranslationShortField = screen.getByTestId(
+        "OrganizationForm-orgTranslationShort",
+      );
+      const orgTranslationField = screen.getByTestId(
+        "OrganizationForm-orgTranslation",
+      );
       const inactiveField = screen.getByTestId("OrganizationForm-inactive");
       const submitButton = screen.getByTestId("OrganizationForm-submit");
 
@@ -146,10 +154,10 @@ describe("UCSBOrganizationEditPage tests", () => {
       expect(mockNavigate).toHaveBeenCalledWith({ to: "/ucsborganization" });
 
       expect(axiosMock.history.put.length).toBe(1); // times called
-      expect(axiosMock.history.put[0].params).toEqual({ orgCode : "DIVE" });
+      expect(axiosMock.history.put[0].params).toEqual({ orgCode: "DIVE" });
       expect(axiosMock.history.put[0].data).toBe(
         JSON.stringify({
-          orgCode : "DIVE",
+          orgCode: "DIVE",
           orgTranslationShort: "Diving Club",
           orgTranslation: "UCSB's Amazing Diving Club",
           inactive: "true",
@@ -169,11 +177,14 @@ describe("UCSBOrganizationEditPage tests", () => {
       await screen.findByTestId("OrganizationForm-orgCode");
 
       const orgCodeField = screen.getByTestId("OrganizationForm-orgCode");
-      const orgTranslationShortField = screen.getByTestId("OrganizationForm-orgTranslationShort");
-      const orgTranslationField = screen.getByTestId("OrganizationForm-orgTranslation");
+      const orgTranslationShortField = screen.getByTestId(
+        "OrganizationForm-orgTranslationShort",
+      );
+      const orgTranslationField = screen.getByTestId(
+        "OrganizationForm-orgTranslation",
+      );
       const inactiveField = screen.getByTestId("OrganizationForm-inactive");
       const submitButton = screen.getByTestId("OrganizationForm-submit");
-
 
       // expect(orgCodeField).toBeInTheDocument();
       expect(orgCodeField).toHaveValue("DIVE");
