@@ -6,7 +6,7 @@ import MenuItemReviewTable from "main/components/MenuItemReview/MenuItemReviewTa
 import { useCurrentUser, hasRole } from "main/utils/currentUser";
 import { Button } from "react-bootstrap";
 
-export default function RestaurantIndexPage() {
+export default function MenuItemReviewIndexPage() {
   const currentUser = useCurrentUser();
 
   const {
