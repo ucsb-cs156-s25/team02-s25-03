@@ -68,15 +68,10 @@ public class MenuItemReviewIT {
                 MenuItemReview menuItemReview1 = MenuItemReview.builder()
                     .itemId(1)
                     .reviewerEmail("null")
-                    .stars(1)
+                    .stars(4)
                     .dateReviewed(ldt1)
                     .comments("ldt1")
                     .build();
-
-                // MenuItemReview menuItemReview = MenuItemReview.builder()
-                //                 .name("Taco Bell")
-                //                 .description("Mexican")
-                //                 .build();
                                 
                 menuItemReviewRepository.save(menuItemReview1);
 
@@ -102,14 +97,14 @@ public class MenuItemReviewIT {
                 .id(1L)
                     .itemId(1)
                     .reviewerEmail("null")
-                    .stars(1)
+                    .stars(4)
                     .dateReviewed(ldt1)
                     .comments("ldt1")
                     .build();
 
                 // act
                 MvcResult response = mockMvc.perform(
-                                post("/api/menuitemreview/post?itemId=1&reviewerEmail=null&stars=1&dateReviewed=2022-01-03T00:00:00&comments=ldt1")
+                                post("/api/menuitemreview/post?itemId=1&reviewerEmail=null&stars=4&dateReviewed=2022-01-03T00:00:00&comments=ldt1")
                                                 .with(csrf()))
                                 .andExpect(status().isOk()).andReturn();
 
