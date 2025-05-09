@@ -81,7 +81,7 @@ public class MenuItemReviewIT {
                 menuItemReviewRepository.save(menuItemReview1);
 
                 // act
-                MvcResult response = mockMvc.perform(get("/api/menuItemReviews?id=1"))
+                MvcResult response = mockMvc.perform(get("/api/menuitemreview?id=1"))
                                 .andExpect(status().isOk()).andReturn();
 
                 // assert
@@ -91,26 +91,37 @@ public class MenuItemReviewIT {
                 assertEquals(expectedJson, responseString);
         }
 
-        // @WithMockUser(roles = { "ADMIN", "USER" })
-        // @Test
-        // public void an_admin_user_can_post_a_new_menuItemReview() throws Exception {
-        //         // arrange
+        @WithMockUser(roles = { "ADMIN", "USER" })
+        @Test
+        public void an_admin_user_can_post_a_new_menuItemReview() throws Exception {
+                // arrange
 
-        //         MenuItemReview menuItemReview1 = MenuItemReview.builder()
-        //                         .id(1L)
-        //                         .name("Chipotle")
-        //                         .description("Mexican")
-        //                         .build();
+                // MenuItemReview menuItemReview1 = MenuItemReview.builder()
+                //                 .id(1L)
+                //                 .name("Chipotle")
+                //                 .description("Mexican")
+                //                 .build();
 
-        //         // act
-        //         MvcResult response = mockMvc.perform(
-        //                         post("/api/menuItemReviews/post?name=Chipotle&description=Mexican")
-        //                                         .with(csrf()))
-        //                         .andExpect(status().isOk()).andReturn();
+                LocalDateTime ldt1 = LocalDateTime.parse("2022-01-03T00:00:00");
 
-        //         // assert
-        //         String expectedJson = mapper.writeValueAsString(menuItemReview1);
-        //         String responseString = response.getResponse().getContentAsString();
-        //         assertEquals(expectedJson, responseString);
-        // }
+                MenuItemReview menuItemReview1 = MenuItemReview.builder()
+                .id(1L)
+                    .itemId(1)
+                    .reviewerEmail("null")
+                    .stars(1)
+                    .dateReviewed(ldt1)
+                    .comments("ldt1")
+                    .build();
+
+                // act
+                MvcResult response = mockMvc.perform(
+                                post("/api/menuitemreview/post?itemId=1&reviewerEmail=null&stars=1&dateReviewed=2022-01-03T00:00:00&comments=ldt1")
+                                                .with(csrf()))
+                                .andExpect(status().isOk()).andReturn();
+
+                // assert
+                String expectedJson = mapper.writeValueAsString(menuItemReview1);
+                String responseString = response.getResponse().getContentAsString();
+                assertEquals(expectedJson, responseString);
+        }
 }
