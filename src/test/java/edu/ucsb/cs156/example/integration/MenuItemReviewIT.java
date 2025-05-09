@@ -96,12 +96,6 @@ public class MenuItemReviewIT {
         public void an_admin_user_can_post_a_new_menuItemReview() throws Exception {
                 // arrange
 
-                // MenuItemReview menuItemReview1 = MenuItemReview.builder()
-                //                 .id(1L)
-                //                 .name("Chipotle")
-                //                 .description("Mexican")
-                //                 .build();
-
                 LocalDateTime ldt1 = LocalDateTime.parse("2022-01-03T00:00:00");
 
                 MenuItemReview menuItemReview1 = MenuItemReview.builder()
