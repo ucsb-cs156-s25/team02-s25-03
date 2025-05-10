@@ -156,8 +156,8 @@ function RecommendationRequestForm({
           })}
         >
           <option value="">---</option>
-          <option value="true">True</option>
-          <option value="false">False</option>
+          <option value="true">true</option>
+          <option value="false">false</option>
         </Form.Control>
         <Form.Control.Feedback type="invalid">
           {errors.done?.message}
