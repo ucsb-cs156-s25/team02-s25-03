@@ -63,11 +63,12 @@ public class UCSBOrganizationIT {
                 UCSBOrganization ucsbOrganization = UCSBOrganization.builder()
                                 .orgCode("DIVE")
                                 .orgTranslationShort("Diving")
-                                .orgTranslation("UCSB_Diving_Club")
+                                .orgTranslation("UCSB Diving Club")
                                 .inactive(true)
                                 .build();
-                                
+
                 ucsbOrganizationRepository.save(ucsbOrganization);
+                                
 
                 // act
                 MvcResult response = mockMvc.perform(get("/api/ucsborganization?orgCode=DIVE"))
@@ -87,17 +88,13 @@ public class UCSBOrganizationIT {
                 UCSBOrganization ucsbOrganization1 = UCSBOrganization.builder()
                                 .orgCode("DIVE")
                                 .orgTranslationShort("Diving")
-                                .orgTranslation("UCSB_Diving_Club")
+                                .orgTranslation("UCSB Diving Club")
                                 .inactive(true)
                                 .build();
 
                 // act
                 MvcResult response = mockMvc.perform(
-                                post("/api/ucsborganization/post")
-                                        .param("orgCode", ucsbOrganization1.getOrgCode())
-                                        .param("orgTranslationShort", ucsbOrganization1.getOrgTranslationShort())
-                                        .param("orgTranslation", ucsbOrganization1.getOrgTranslation())
-                                        .param("inactive", String.valueOf(ucsbOrganization1.getInactive()))
+                                post("/api/ucsborganization/post?orgCode=DIVE&orgTranslationShort=Diving&orgTranslation=UCSB Diving Club&inactive=true")
                                                 .with(csrf()))
                                 .andExpect(status().isOk()).andReturn();
 
