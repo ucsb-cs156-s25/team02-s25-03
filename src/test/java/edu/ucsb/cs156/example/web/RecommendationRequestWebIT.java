@@ -45,6 +45,6 @@ public class RecommendationRequestWebIT extends WebTestCase {
 
         page.getByTestId("RecommendationRequestTable-cell-row-0-col-Delete-button").click();
 
-        assertThat(page.getByTestId("RecommendationRequestTable-cell-row-0-col-id")).not().isVisible();
+        assertThat(page.getByTestId("RecommendationRequestTable-cell-row-0-col-requesterEmail")).not().isVisible();
     }
 }

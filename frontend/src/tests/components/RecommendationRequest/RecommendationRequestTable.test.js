@@ -163,6 +163,10 @@ describe("RecommendationRequestTable tests", () => {
       "3",
     );
     expect(
+      screen.getByTestId(`${testId}-cell-row-1-col-done`),
+    ).toHaveTextContent("false");
+
+    expect(
       screen.getByTestId(`${testId}-cell-row-1-col-explanation`),
     ).toHaveTextContent("nest");
 
