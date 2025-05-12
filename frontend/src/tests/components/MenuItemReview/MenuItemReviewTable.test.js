@@ -1,6 +1,6 @@
 import { fireEvent, render, waitFor, screen } from "@testing-library/react";
-import { organizationFixtures } from "fixtures/ucsbOrganizationFixtures";
-import OrganizationTable from "main/components/Organizations/OrganizationTable";
+import { menuItemReviewFixtures } from "fixtures/menuItemReviewFixtures";
+import MenuItemReviewTable from "main/components/MenuItemReview/MenuItemReviewTable";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { MemoryRouter } from "react-router-dom";
 import { currentUserFixtures } from "fixtures/currentUserFixtures";
@@ -14,22 +14,26 @@ jest.mock("react-router-dom", () => ({
   useNavigate: () => mockedNavigate,
 }));
 
-describe("Organization Table tests", () => {
+describe("MenuItemReviewTable tests", () => {
   const queryClient = new QueryClient();
 
   const expectedHeaders = [
-    "Organization ID",
-    "Organization Translation Short",
-    "Organization Translation",
-    "Inactive",
+    "id",
+    "Item ID",
+    "Reviewer Email",
+    "Stars",
+    "Date Reviewed",
+    "Comments",
   ];
   const expectedFields = [
-    "orgCode",
-    "orgTranslationShort",
-    "orgTranslation",
-    "inactive",
+    "id",
+    "itemId",
+    "reviewerEmail",
+    "stars",
+    "dateReviewed",
+    "comments",
   ];
-  const testId = "OrganizationTable";
+  const testId = "MenuItemReviewTable";
 
   test("renders empty table correctly", () => {
     // arrange
@@ -39,7 +43,7 @@ describe("Organization Table tests", () => {
     render(
       <QueryClientProvider client={queryClient}>
         <MemoryRouter>
-          <OrganizationTable organizations={[]} currentUser={currentUser} />
+          <MenuItemReviewTable menuItemReviews={[]} currentUser={currentUser} />
         </MemoryRouter>
       </QueryClientProvider>,
     );
@@ -66,8 +70,8 @@ describe("Organization Table tests", () => {
     render(
       <QueryClientProvider client={queryClient}>
         <MemoryRouter>
-          <OrganizationTable
-            organizations={organizationFixtures.threeOrganizations}
+          <MenuItemReviewTable
+            menuItemReviews={menuItemReviewFixtures.threeMenuItemReviews}
             currentUser={currentUser}
           />
         </MemoryRouter>
@@ -85,31 +89,19 @@ describe("Organization Table tests", () => {
       expect(header).toBeInTheDocument();
     });
 
+    expect(screen.getByTestId(`${testId}-cell-row-0-col-id`)).toHaveTextContent(
+      "1",
+    );
     expect(
-      screen.getByTestId(`${testId}-cell-row-0-col-orgCode`),
-    ).toHaveTextContent("DIVE");
-    expect(
-      screen.getByTestId(`${testId}-cell-row-0-col-orgTranslationShort`),
-    ).toHaveTextContent("Diving");
-    expect(
-      screen.getByTestId(`${testId}-cell-row-0-col-orgTranslation`),
-    ).toHaveTextContent("UCSB Diving Club");
-    expect(
-      screen.getByTestId(`${testId}-cell-row-0-col-inactive`),
-    ).toHaveTextContent("false");
+      screen.getByTestId(`${testId}-cell-row-0-col-comments`),
+    ).toHaveTextContent("bland af but edible I guess");
 
+    expect(screen.getByTestId(`${testId}-cell-row-1-col-id`)).toHaveTextContent(
+      "2",
+    );
     expect(
-      screen.getByTestId(`${testId}-cell-row-1-col-orgCode`),
-    ).toHaveTextContent("GAME");
-    expect(
-      screen.getByTestId(`${testId}-cell-row-1-col-orgTranslationShort`),
-    ).toHaveTextContent("Gaming");
-    expect(
-      screen.getByTestId(`${testId}-cell-row-1-col-orgTranslation`),
-    ).toHaveTextContent("Gaucho Gaming");
-    expect(
-      screen.getByTestId(`${testId}-cell-row-1-col-inactive`),
-    ).toHaveTextContent("true");
+      screen.getByTestId(`${testId}-cell-row-1-col-reviewerEmail`),
+    ).toHaveTextContent("cgaucho@ucsb.edu");
 
     const editButton = screen.getByTestId(
       `${testId}-cell-row-0-col-Edit-button`,
@@ -132,8 +124,8 @@ describe("Organization Table tests", () => {
     render(
       <QueryClientProvider client={queryClient}>
         <MemoryRouter>
-          <OrganizationTable
-            organizations={organizationFixtures.threeOrganizations}
+          <MenuItemReviewTable
+            menuItemReviews={menuItemReviewFixtures.threeMenuItemReviews}
             currentUser={currentUser}
           />
         </MemoryRouter>
@@ -151,31 +143,19 @@ describe("Organization Table tests", () => {
       expect(header).toBeInTheDocument();
     });
 
+    expect(screen.getByTestId(`${testId}-cell-row-0-col-id`)).toHaveTextContent(
+      "1",
+    );
     expect(
-      screen.getByTestId(`${testId}-cell-row-0-col-orgCode`),
-    ).toHaveTextContent("DIVE");
-    expect(
-      screen.getByTestId(`${testId}-cell-row-0-col-orgTranslationShort`),
-    ).toHaveTextContent("Diving");
-    expect(
-      screen.getByTestId(`${testId}-cell-row-0-col-orgTranslation`),
-    ).toHaveTextContent("UCSB Diving Club");
-    expect(
-      screen.getByTestId(`${testId}-cell-row-0-col-inactive`),
-    ).toHaveTextContent("false");
+      screen.getByTestId(`${testId}-cell-row-0-col-comments`),
+    ).toHaveTextContent("bland af but edible I guess");
 
+    expect(screen.getByTestId(`${testId}-cell-row-1-col-id`)).toHaveTextContent(
+      "2",
+    );
     expect(
-      screen.getByTestId(`${testId}-cell-row-1-col-orgCode`),
-    ).toHaveTextContent("GAME");
-    expect(
-      screen.getByTestId(`${testId}-cell-row-1-col-orgTranslationShort`),
-    ).toHaveTextContent("Gaming");
-    expect(
-      screen.getByTestId(`${testId}-cell-row-1-col-orgTranslation`),
-    ).toHaveTextContent("Gaucho Gaming");
-    expect(
-      screen.getByTestId(`${testId}-cell-row-1-col-inactive`),
-    ).toHaveTextContent("true");
+      screen.getByTestId(`${testId}-cell-row-1-col-reviewerEmail`),
+    ).toHaveTextContent("cgaucho@ucsb.edu");
 
     expect(screen.queryByText("Delete")).not.toBeInTheDocument();
     expect(screen.queryByText("Edit")).not.toBeInTheDocument();
@@ -189,8 +169,8 @@ describe("Organization Table tests", () => {
     render(
       <QueryClientProvider client={queryClient}>
         <MemoryRouter>
-          <OrganizationTable
-            organizations={organizationFixtures.threeOrganizations}
+          <MenuItemReviewTable
+            menuItemReviews={menuItemReviewFixtures.threeMenuItemReviews}
             currentUser={currentUser}
           />
         </MemoryRouter>
@@ -199,17 +179,8 @@ describe("Organization Table tests", () => {
 
     // assert - check that the expected content is rendered
     expect(
-      await screen.findByTestId(`${testId}-cell-row-0-col-orgCode`),
-    ).toHaveTextContent("DIVE");
-    expect(
-      screen.getByTestId(`${testId}-cell-row-0-col-orgTranslationShort`),
-    ).toHaveTextContent("Diving");
-    expect(
-      screen.getByTestId(`${testId}-cell-row-0-col-orgTranslation`),
-    ).toHaveTextContent("UCSB Diving Club");
-    expect(
-      screen.getByTestId(`${testId}-cell-row-0-col-inactive`),
-    ).toHaveTextContent("false");
+      await screen.findByTestId(`${testId}-cell-row-0-col-id`),
+    ).toHaveTextContent("1");
 
     const editButton = screen.getByTestId(
       `${testId}-cell-row-0-col-Edit-button`,
@@ -221,9 +192,7 @@ describe("Organization Table tests", () => {
 
     // assert - check that the navigate function was called with the expected path
     await waitFor(() =>
-      expect(mockedNavigate).toHaveBeenCalledWith(
-        "/ucsborganization/edit/DIVE",
-      ),
+      expect(mockedNavigate).toHaveBeenCalledWith("/menuitemreview/edit/1"),
     );
   });
 
@@ -233,15 +202,15 @@ describe("Organization Table tests", () => {
 
     const axiosMock = new AxiosMockAdapter(axios);
     axiosMock
-      .onDelete("/api/ucsborganization")
-      .reply(200, { message: "Organization deleted" });
+      .onDelete("/api/menuitemreview")
+      .reply(200, { message: "Menu Item Review deleted" });
 
     // act - render the component
     render(
       <QueryClientProvider client={queryClient}>
         <MemoryRouter>
-          <OrganizationTable
-            organizations={organizationFixtures.threeOrganizations}
+          <MenuItemReviewTable
+            menuItemReviews={menuItemReviewFixtures.threeMenuItemReviews}
             currentUser={currentUser}
           />
         </MemoryRouter>
@@ -250,17 +219,8 @@ describe("Organization Table tests", () => {
 
     // assert - check that the expected content is rendered
     expect(
-      await screen.findByTestId(`${testId}-cell-row-0-col-orgCode`),
-    ).toHaveTextContent("DIVE");
-    expect(
-      screen.getByTestId(`${testId}-cell-row-0-col-orgTranslationShort`),
-    ).toHaveTextContent("Diving");
-    expect(
-      screen.getByTestId(`${testId}-cell-row-0-col-orgTranslation`),
-    ).toHaveTextContent("UCSB Diving Club");
-    expect(
-      screen.getByTestId(`${testId}-cell-row-0-col-inactive`),
-    ).toHaveTextContent("false");
+      await screen.findByTestId(`${testId}-cell-row-0-col-id`),
+    ).toHaveTextContent("1");
 
     const deleteButton = screen.getByTestId(
       `${testId}-cell-row-0-col-Delete-button`,
@@ -273,6 +233,6 @@ describe("Organization Table tests", () => {
     // assert - check that the delete endpoint was called
 
     await waitFor(() => expect(axiosMock.history.delete.length).toBe(1));
-    expect(axiosMock.history.delete[0].params).toEqual({ orgCode: "DIVE" });
+    expect(axiosMock.history.delete[0].params).toEqual({ id: 1 });
   });
 });

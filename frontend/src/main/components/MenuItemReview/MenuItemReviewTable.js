@@ -5,19 +5,19 @@ import { useBackendMutation } from "main/utils/useBackend";
 import {
   cellToAxiosParamsDelete,
   onDeleteSuccess,
-} from "main/utils/organizationUtils";
+} from "main/utils/menuItemReviewUtils";
 import { useNavigate } from "react-router-dom";
 import { hasRole } from "main/utils/currentUser";
 
-export default function OrganizationTable({
-  organizations,
+export default function MenuItemReviewTable({
+  menuItemReviews,
   currentUser,
-  testIdPrefix = "OrganizationTable",
+  testIdPrefix = "MenuItemReviewTable",
 }) {
   const navigate = useNavigate();
 
   const editCallback = (cell) => {
-    navigate(`/ucsborganization/edit/${cell.row.values.orgCode}`);
+    navigate(`/menuitemreview/edit/${cell.row.values.id}`);
   };
 
   // Stryker disable all : hard to test for query caching
@@ -25,7 +25,7 @@ export default function OrganizationTable({
   const deleteMutation = useBackendMutation(
     cellToAxiosParamsDelete,
     { onSuccess: onDeleteSuccess },
-    ["/api/ucsborganization/all"],
+    ["/api/menuitemreview/all"],
   );
   // Stryker restore all
 
@@ -36,22 +36,29 @@ export default function OrganizationTable({
 
   const columns = [
     {
-      Header: "Organization ID",
-      accessor: "orgCode", // accessor is the "key" in the data
+      Header: "id",
+      accessor: "id", // accessor is the "key" in the data
     },
 
     {
-      Header: "Organization Translation Short",
-      accessor: "orgTranslationShort",
+      Header: "Item ID",
+      accessor: "itemId",
     },
     {
-      Header: "Organization Translation",
-      accessor: "orgTranslation",
+      Header: "Reviewer Email",
+      accessor: "reviewerEmail",
     },
     {
-      Header: "Inactive",
-      accessor: "inactive",
-      Cell: ({ value }) => value.toString(),
+      Header: "Stars",
+      accessor: "stars",
+    },
+    {
+      Header: "Date Reviewed",
+      accessor: "dateReviewed",
+    },
+    {
+      Header: "Comments",
+      accessor: "comments",
     },
   ];
 
@@ -63,6 +70,6 @@ export default function OrganizationTable({
   }
 
   return (
-    <OurTable data={organizations} columns={columns} testid={testIdPrefix} />
+    <OurTable data={menuItemReviews} columns={columns} testid={testIdPrefix} />
   );
 }
