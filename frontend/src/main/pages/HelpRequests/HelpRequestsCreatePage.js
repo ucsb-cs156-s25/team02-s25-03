@@ -5,9 +5,7 @@ import { useBackendMutation } from "main/utils/useBackend";
 import { toast } from "react-toastify";
 
 export default function HelpRequestsCreatePage({ storybook = false }) {
-
   const addZ = (string) => `${string}Z`;
-
 
   const objectToAxiosParams = (helprequest) => ({
     url: "/api/helprequests/post",
@@ -24,7 +22,7 @@ export default function HelpRequestsCreatePage({ storybook = false }) {
 
   const onSuccess = (helprequest) => {
     toast(
-      `New restaurant Created - id: ${helprequest.id} requesterEmail: ${helprequest.requesterEmail} teamId: ${helprequest.teamId} tableOrBreakoutRoom: ${helprequest.tableOrBreakoutRoom} requestTime: ${helprequest.requestTime} explanation: ${helprequest.explanation} solved: ${helprequest.solved}`,
+      `New helprequest Created - id: ${helprequest.id} requesterEmail: ${helprequest.requesterEmail} teamId: ${helprequest.teamId} tableOrBreakoutRoom: ${helprequest.tableOrBreakoutRoom} requestTime: ${helprequest.requestTime} explanation: ${helprequest.explanation} solved: ${helprequest.solved}`,
     );
   };
 
