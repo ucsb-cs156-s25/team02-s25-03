@@ -3,7 +3,6 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 
 export function removeZ(myString) {
-  if (typeof myString !== "string") return myString;
   return myString.replace("Z", "");
 }
 
@@ -84,7 +83,7 @@ function HelpRequestForm({
           type="text"
           isInvalid={Boolean(errors.teamId)}
           {...register("teamId", {
-            required: "teamId is required.",
+            required: "teamId is required",
           })}
         />
         <Form.Control.Feedback type="invalid">
@@ -101,7 +100,7 @@ function HelpRequestForm({
           type="text"
           isInvalid={Boolean(errors.tableOrBreakoutRoom)}
           {...register("tableOrBreakoutRoom", {
-            required: "tableOrBreakoutRoom is required.",
+            required: "tableOrBreakoutRoom is required",
           })}
         />
         <Form.Control.Feedback type="invalid">
@@ -121,7 +120,7 @@ function HelpRequestForm({
           })}
         />
         <Form.Control.Feedback type="invalid">
-          {errors.requestTime && "requestTime is required. "}
+          {errors.requestTime && "requestTime is required"}
         </Form.Control.Feedback>
       </Form.Group>
 
@@ -147,7 +146,7 @@ function HelpRequestForm({
           id="solved"
           isInvalid={Boolean(errors.solved)}
           {...register("solved", {
-            validate: (value) => value === true || "solved is required.",
+            validate: (value) => value === true || "solved is required",
           })}
           {...register("solved")}
         />
