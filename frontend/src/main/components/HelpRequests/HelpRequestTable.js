@@ -2,7 +2,10 @@ import React from "react";
 import OurTable, { ButtonColumn } from "main/components/OurTable";
 
 import { useBackendMutation } from "main/utils/useBackend";
-import { cellToAxiosParamsDelete, onDeleteSuccess } from "main/utils/HelpRequestUtils";
+import {
+  cellToAxiosParamsDelete,
+  onDeleteSuccess,
+} from "main/utils/HelpRequestUtils";
 
 import { useNavigate } from "react-router-dom";
 import { hasRole } from "main/utils/currentUser";
@@ -47,21 +50,21 @@ export default function HelpRequestTable({
       accessor: "teamId",
     },
     {
-        Header: "tableOrBreakoutRoom",
-        accessor: "tableOrBreakoutRoom",
+      Header: "tableOrBreakoutRoom",
+      accessor: "tableOrBreakoutRoom",
     },
     {
-        Header: "requestTime",
-        accessor: "requestTime",
+      Header: "requestTime",
+      accessor: "requestTime",
     },
 
     {
-        Header: "explanation",
-        accessor: "explanation",
+      Header: "explanation",
+      accessor: "explanation",
     },
     {
-        Header: "solved",
-        accessor: "solved",
+      Header: "solved",
+      accessor: "solved",
     },
   ];
 

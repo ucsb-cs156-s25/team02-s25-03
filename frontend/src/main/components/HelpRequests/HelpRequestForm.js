@@ -2,17 +2,10 @@ import { Button, Form } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 
-
 export function removeZ(myString) {
   if (typeof myString !== "string") return myString;
   return myString.replace("Z", "");
 }
-
-
-
-
-
-
 
 function HelpRequestForm({
   initialContents,
@@ -159,8 +152,7 @@ function HelpRequestForm({
           //data-testid={testIdPrefix + "-solved"}
           isInvalid={Boolean(errors.solved)}
           {...register("solved", {
-            validate: (value) => value === true || "solved is required."
-            
+            validate: (value) => value === true || "solved is required.",
           })}
         />
         <Form.Control.Feedback type="invalid">
@@ -168,9 +160,7 @@ function HelpRequestForm({
         </Form.Control.Feedback>
       </Form.Group>
 
-      <Button type="submit">
-        {buttonLabel}
-      </Button>
+      <Button type="submit">{buttonLabel}</Button>
       <Button
         variant="Secondary"
         onClick={() => navigate(-1)}

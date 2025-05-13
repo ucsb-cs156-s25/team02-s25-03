@@ -14,7 +14,7 @@ jest.mock("react-router-dom", () => ({
   useNavigate: () => mockedNavigate,
 }));
 
-describe("RestaurantTable tests", () => {
+describe("HelpRequestTable tests", () => {
   const queryClient = new QueryClient();
 
   const expectedHeaders = [
@@ -65,7 +65,6 @@ describe("RestaurantTable tests", () => {
   });
 
   test("Has the expected column headers, content and buttons for admin user", () => {
-
     // arrange
     const currentUser = currentUserFixtures.adminUser;
 
@@ -99,10 +98,18 @@ describe("RestaurantTable tests", () => {
       screen.getByTestId(`${testId}-cell-row-0-col-requesterEmail`),
     ).toHaveTextContent("sburicha@ucsb.edu");
 
-    expect(screen.getByTestId(`${testId}-cell-row-0-col-teamId`)).toHaveTextContent("s22-5pm-3");
-    expect(screen.getByTestId(`${testId}-cell-row-0-col-tableOrBreakoutRoom`)).toHaveTextContent("5");
-    expect(screen.getByTestId(`${testId}-cell-row-0-col-requestTime`)).toHaveTextContent("2022-04-20T17:35:00Z");
-    expect(screen.getByTestId(`${testId}-cell-row-0-col-explanation`)).toHaveTextContent("DokkuIssue");
+    expect(
+      screen.getByTestId(`${testId}-cell-row-0-col-teamId`),
+    ).toHaveTextContent("s22-5pm-3");
+    expect(
+      screen.getByTestId(`${testId}-cell-row-0-col-tableOrBreakoutRoom`),
+    ).toHaveTextContent("5");
+    expect(
+      screen.getByTestId(`${testId}-cell-row-0-col-requestTime`),
+    ).toHaveTextContent("2022-04-20T17:35:00Z");
+    expect(
+      screen.getByTestId(`${testId}-cell-row-0-col-explanation`),
+    ).toHaveTextContent("DokkuIssue");
     //expect(screen.getByTestId(`${testId}-cell-row-0-col-solved`)).toHaveTextContent("false");
     const editButton = screen.getByTestId(
       `${testId}-cell-row-0-col-Edit-button`,
@@ -116,7 +123,6 @@ describe("RestaurantTable tests", () => {
     expect(deleteButton).toBeInTheDocument();
     expect(deleteButton).toHaveClass("btn-danger");
   });
-
 
   test("Has the expected column headers, content for ordinary user", () => {
     // arrange
@@ -145,26 +151,30 @@ describe("RestaurantTable tests", () => {
       expect(header).toBeInTheDocument();
     });
 
-
     expect(screen.getByTestId(`${testId}-cell-row-0-col-id`)).toHaveTextContent(
-        "1",
-      );
-      expect(
-        screen.getByTestId(`${testId}-cell-row-0-col-requesterEmail`),
-      ).toHaveTextContent("sburicha@ucsb.edu");
-  
-      expect(screen.getByTestId(`${testId}-cell-row-0-col-teamId`)).toHaveTextContent("s22-5pm-3");
-      expect(screen.getByTestId(`${testId}-cell-row-0-col-tableOrBreakoutRoom`)).toHaveTextContent("5");
-      expect(screen.getByTestId(`${testId}-cell-row-0-col-requestTime`)).toHaveTextContent("2022-04-20T17:35:00Z");
-      expect(screen.getByTestId(`${testId}-cell-row-0-col-explanation`)).toHaveTextContent("DokkuIssue");
+      "1",
+    );
+    expect(
+      screen.getByTestId(`${testId}-cell-row-0-col-requesterEmail`),
+    ).toHaveTextContent("sburicha@ucsb.edu");
 
-  
+    expect(
+      screen.getByTestId(`${testId}-cell-row-0-col-teamId`),
+    ).toHaveTextContent("s22-5pm-3");
+    expect(
+      screen.getByTestId(`${testId}-cell-row-0-col-tableOrBreakoutRoom`),
+    ).toHaveTextContent("5");
+    expect(
+      screen.getByTestId(`${testId}-cell-row-0-col-requestTime`),
+    ).toHaveTextContent("2022-04-20T17:35:00Z");
+    expect(
+      screen.getByTestId(`${testId}-cell-row-0-col-explanation`),
+    ).toHaveTextContent("DokkuIssue");
 
     expect(screen.queryByText("Delete")).not.toBeInTheDocument();
     expect(screen.queryByText("Edit")).not.toBeInTheDocument();
   });
 
- 
   test("Edit button navigates to the edit page", async () => {
     // arrange
     const currentUser = currentUserFixtures.adminUser;
@@ -186,13 +196,21 @@ describe("RestaurantTable tests", () => {
       await screen.findByTestId(`${testId}-cell-row-0-col-id`),
     ).toHaveTextContent("1");
     expect(
-        screen.getByTestId(`${testId}-cell-row-0-col-requesterEmail`),
-      ).toHaveTextContent("sburicha@ucsb.edu");
-  
-      expect(screen.getByTestId(`${testId}-cell-row-0-col-teamId`)).toHaveTextContent("s22-5pm-3");
-      expect(screen.getByTestId(`${testId}-cell-row-0-col-tableOrBreakoutRoom`)).toHaveTextContent("5");
-      expect(screen.getByTestId(`${testId}-cell-row-0-col-requestTime`)).toHaveTextContent("2022-04-20T17:35:00Z");
-      expect(screen.getByTestId(`${testId}-cell-row-0-col-explanation`)).toHaveTextContent("DokkuIssue");
+      screen.getByTestId(`${testId}-cell-row-0-col-requesterEmail`),
+    ).toHaveTextContent("sburicha@ucsb.edu");
+
+    expect(
+      screen.getByTestId(`${testId}-cell-row-0-col-teamId`),
+    ).toHaveTextContent("s22-5pm-3");
+    expect(
+      screen.getByTestId(`${testId}-cell-row-0-col-tableOrBreakoutRoom`),
+    ).toHaveTextContent("5");
+    expect(
+      screen.getByTestId(`${testId}-cell-row-0-col-requestTime`),
+    ).toHaveTextContent("2022-04-20T17:35:00Z");
+    expect(
+      screen.getByTestId(`${testId}-cell-row-0-col-explanation`),
+    ).toHaveTextContent("DokkuIssue");
 
     const editButton = screen.getByTestId(
       `${testId}-cell-row-0-col-Edit-button`,
@@ -233,16 +251,23 @@ describe("RestaurantTable tests", () => {
     expect(
       await screen.findByTestId(`${testId}-cell-row-0-col-id`),
     ).toHaveTextContent("1");
-   
-    expect(
-        screen.getByTestId(`${testId}-cell-row-0-col-requesterEmail`),
-      ).toHaveTextContent("sburicha@ucsb.edu");
-  
-      expect(screen.getByTestId(`${testId}-cell-row-0-col-teamId`)).toHaveTextContent("s22-5pm-3");
-      expect(screen.getByTestId(`${testId}-cell-row-0-col-tableOrBreakoutRoom`)).toHaveTextContent("5");
-      expect(screen.getByTestId(`${testId}-cell-row-0-col-requestTime`)).toHaveTextContent("2022-04-20T17:35:00Z");
-      expect(screen.getByTestId(`${testId}-cell-row-0-col-explanation`)).toHaveTextContent("DokkuIssue");
 
+    expect(
+      screen.getByTestId(`${testId}-cell-row-0-col-requesterEmail`),
+    ).toHaveTextContent("sburicha@ucsb.edu");
+
+    expect(
+      screen.getByTestId(`${testId}-cell-row-0-col-teamId`),
+    ).toHaveTextContent("s22-5pm-3");
+    expect(
+      screen.getByTestId(`${testId}-cell-row-0-col-tableOrBreakoutRoom`),
+    ).toHaveTextContent("5");
+    expect(
+      screen.getByTestId(`${testId}-cell-row-0-col-requestTime`),
+    ).toHaveTextContent("2022-04-20T17:35:00Z");
+    expect(
+      screen.getByTestId(`${testId}-cell-row-0-col-explanation`),
+    ).toHaveTextContent("DokkuIssue");
 
     const deleteButton = screen.getByTestId(
       `${testId}-cell-row-0-col-Delete-button`,
@@ -257,4 +282,4 @@ describe("RestaurantTable tests", () => {
     await waitFor(() => expect(axiosMock.history.delete.length).toBe(1));
     expect(axiosMock.history.delete[0].params).toEqual({ id: 1 });
   });
- });
+});
