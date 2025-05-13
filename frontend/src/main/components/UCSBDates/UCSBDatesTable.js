@@ -48,7 +48,6 @@ export default function UCSBDatesTable({ dates, currentUser }) {
       accessor: "localDateTime",
     },
   ];
-
   if (hasRole(currentUser, "ROLE_ADMIN")) {
     columns.push(
       ButtonColumn("Edit", "primary", editCallback, "UCSBDatesTable"),

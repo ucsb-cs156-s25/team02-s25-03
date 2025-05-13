@@ -5,6 +5,10 @@ import { useNavigate } from "react-router-dom";
 export function removeZ(myString) {
   if (typeof myString !== "string") return myString;
   return myString.replace("Z", "");
+
+export function removeZ(mystring) {
+  return mystring.replace("Z", "");
+
 }
 
 function HelpRequestForm({
@@ -58,18 +62,18 @@ function HelpRequestForm({
       )}
 
       <Form.Group className="mb-3">
-        <Form.Label htmlFor="requesterEmail">requesterEmail</Form.Label>
+        <Form.Label htmlFor="requesterEmail">Requester Email</Form.Label>
         <Form.Control
-          //data-testid={testIdPrefix + "-requesterEmail"}
+          data-testid={testIdPrefix + "-requesterEmail"}
           id="requesterEmail"
           type="text"
           isInvalid={Boolean(errors.requesterEmail)}
           {...register("requesterEmail", {
             required: "requesterEmail is required.",
-            // maxLength: {
-            //   value: 30,
-            //   message: "Max length 30 characters",
-            // },
+            maxLength: {
+              value: 255,
+              message: "Max length 255 characters",
+            },
           })}
         />
         <Form.Control.Feedback type="invalid">
@@ -78,9 +82,8 @@ function HelpRequestForm({
       </Form.Group>
 
       <Form.Group className="mb-3">
-        <Form.Label htmlFor="teamId">teamId</Form.Label>
+        <Form.Label htmlFor="teamId">Team Id</Form.Label>
         <Form.Control
-          //data-testid={testIdPrefix + "-teamId"}
           id="teamId"
           type="text"
           isInvalid={Boolean(errors.teamId)}
@@ -95,10 +98,9 @@ function HelpRequestForm({
 
       <Form.Group className="mb-3">
         <Form.Label htmlFor="tableOrBreakoutRoom">
-          tableOrBreakoutRoom
+          Table or Breakout Room
         </Form.Label>
         <Form.Control
-          //data-testid={testIdPrefix + "-tableOrBreakoutRoom"}
           id="tableOrBreakoutRoom"
           type="text"
           isInvalid={Boolean(errors.tableOrBreakoutRoom)}
@@ -112,9 +114,8 @@ function HelpRequestForm({
       </Form.Group>
 
       <Form.Group className="mb-3">
-        <Form.Label htmlFor="requestTime">requestTime</Form.Label>
+        <Form.Label htmlFor="requestTime">Request Time</Form.Label>
         <Form.Control
-          //data-testid={testIdPrefix + "-requestTime"}
           id="requestTime"
           type="datetime-local"
           isInvalid={Boolean(errors.requestTime)}
@@ -129,9 +130,8 @@ function HelpRequestForm({
       </Form.Group>
 
       <Form.Group className="mb-3">
-        <Form.Label htmlFor="explanation">explanation</Form.Label>
+        <Form.Label htmlFor="explanation">Explanation</Form.Label>
         <Form.Control
-          //data-testid={testIdPrefix + "-explanation"}
           id="explanation"
           type="text"
           isInvalid={Boolean(errors.explanation)}
@@ -145,15 +145,18 @@ function HelpRequestForm({
       </Form.Group>
 
       <Form.Group className="mb-3">
+        <Form.Label htmlFor="solved">Solved</Form.Label>
         <Form.Check
           type="checkbox"
           id="solved"
-          label="solved"
-          //data-testid={testIdPrefix + "-solved"}
           isInvalid={Boolean(errors.solved)}
+          
           {...register("solved", {
             validate: (value) => value === true || "solved is required.",
           })}
+
+          {...register("solved")}
+
         />
         <Form.Control.Feedback type="invalid">
           {errors.solved?.message}

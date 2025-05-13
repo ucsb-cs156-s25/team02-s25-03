@@ -14,7 +14,7 @@ jest.mock("react-router-dom", () => ({
   useNavigate: () => mockedNavigate,
 }));
 
-describe("RestaurantTable tests", () => {
+describe("HelpRequestTable tests", () => {
   const queryClient = new QueryClient();
 
   const expectedHeaders = [
