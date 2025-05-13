@@ -64,7 +64,9 @@ describe("HelpRequestEditPage tests", () => {
         </QueryClientProvider>,
       );
       await screen.findByText("Edit HelpRequest");
-      expect(screen.queryByTestId("HelpRequest-requesterEmail")).not.toBeInTheDocument();
+      expect(
+        screen.queryByTestId("HelpRequest-requesterEmail"),
+      ).not.toBeInTheDocument();
       restoreConsole();
     });
   });
@@ -117,20 +119,20 @@ describe("HelpRequestEditPage tests", () => {
       const idField = screen.getByTestId("HelpRequestForm-id");
       const reqEmailField = screen.getByLabelText("Requester Email");
       const teamIdField = screen.getByLabelText("Team Id");
-      const tableOrBreakoutRoomField = screen.getByLabelText("Table or Breakout Room");
+      const tableOrBreakoutRoomField = screen.getByLabelText(
+        "Table or Breakout Room",
+      );
       const requestTimeField = screen.getByLabelText("Request Time");
       const explanationField = screen.getByLabelText("Explanation");
       const solvedField = screen.getByLabelText("Solved");
-      
+
       const submitButton = screen.getByText("Update");
 
       expect(idField).toBeInTheDocument();
       expect(idField).toHaveValue("17");
 
-
       expect(reqEmailField).toBeInTheDocument();
       expect(reqEmailField).toHaveValue("sburicha@ucsb.edu");
-
 
       expect(teamIdField).toBeInTheDocument();
       expect(teamIdField).toHaveValue("s22-5pm-3\t");
@@ -145,7 +147,7 @@ describe("HelpRequestEditPage tests", () => {
       expect(explanationField).toHaveValue("DokkuIssue");
 
       expect(solvedField).toBeInTheDocument();
-      expect(solvedField).not.toBeChecked(); 
+      expect(solvedField).not.toBeChecked();
 
       expect(submitButton).toHaveTextContent("Update");
 
@@ -168,17 +170,13 @@ describe("HelpRequestEditPage tests", () => {
         target: { value: "false" },
       });
 
-      
-
       fireEvent.click(submitButton);
 
       await waitFor(() => expect(mockToast).toHaveBeenCalled());
 
       expect(mockToast).toHaveBeenCalledWith(
-        "HelpRequest Updated - id: 17 requesterEmail: syuricha@ucsb.edu teamId: s22-6pm-3	 tableOrBreakoutRoom: 7 requestTime: 2023-04-20T17:35:02.000Z explanation: DokkuIssue solved: false"
-    );
-
-      
+        "HelpRequest Updated - id: 17 requesterEmail: syuricha@ucsb.edu teamId: s22-6pm-3	 tableOrBreakoutRoom: 7 requestTime: 2023-04-20T17:35:02.000Z explanation: DokkuIssue solved: false",
+      );
 
       expect(mockNavigate).toHaveBeenCalledWith({ to: "/helprequests" });
 
@@ -186,12 +184,12 @@ describe("HelpRequestEditPage tests", () => {
       expect(axiosMock.history.put[0].params).toEqual({ id: "17" });
       expect(axiosMock.history.put[0].data).toBe(
         JSON.stringify({
-            requesterEmail: "syuricha@ucsb.edu",
-            teamId: "s22-6pm-3\t",
-            tableOrBreakoutRoom: "7",
-            requestTime: "2023-04-20T17:35:02.000Z",
-            explanation: "DokkuIssue",
-            solved: false,
+          requesterEmail: "syuricha@ucsb.edu",
+          teamId: "s22-6pm-3\t",
+          tableOrBreakoutRoom: "7",
+          requestTime: "2023-04-20T17:35:02.000Z",
+          explanation: "DokkuIssue",
+          solved: false,
         }),
       ); // posted object
       expect(mockNavigate).toHaveBeenCalledWith({ to: "/helprequests" });
@@ -215,16 +213,14 @@ describe("HelpRequestEditPage tests", () => {
     //   const requestTimeField = screen.getByLabelText("Request Time");
     //   const explanationField = screen.getByLabelText("Explanation");
     //   const solvedField = screen.getByLabelText("Solved");
-      
+
     //   const submitButton = screen.getByText("Update");
 
     //   expect(idField).toBeInTheDocument();
     //   expect(idField).toHaveValue("17");
 
-
     //   expect(reqEmailField).toBeInTheDocument();
     //   expect(reqEmailField).toHaveValue("sburicha@ucsb.edu");
-
 
     //   expect(teamIdField).toBeInTheDocument();
     //   expect(teamIdField).toHaveValue("s22-5pm-3\t");
@@ -239,7 +235,7 @@ describe("HelpRequestEditPage tests", () => {
     //   expect(explanationField).toHaveValue("DokkuIssue");
 
     //   expect(solvedField).toBeInTheDocument();
-    //   expect(solvedField).not.toBeChecked(); 
+    //   expect(solvedField).not.toBeChecked();
 
     //   expect(submitButton).toHaveTextContent("Update");
 
