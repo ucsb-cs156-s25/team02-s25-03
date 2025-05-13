@@ -1,7 +1,9 @@
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { BrowserRouter as Router } from "react-router-dom";
 
-import HelpRequestForm, {removeZ} from "main/components/HelpRequests/HelpRequestForm";
+import HelpRequestForm, {
+  removeZ,
+} from "main/components/HelpRequests/HelpRequestForm";
 import { helpRequestFixtures } from "fixtures/helpRequestsFixtures";
 
 import { QueryClient, QueryClientProvider } from "react-query";
@@ -26,65 +28,52 @@ describe("HelpRequestForm tests", () => {
   ];
   const testId = "HelpRequestForm";
 
-
-
-
-
   test("should not show error when 'solved' checkbox is checked", async () => {
     render(
       <QueryClientProvider client={queryClient}>
         <Router>
           <HelpRequestForm />
         </Router>
-      </QueryClientProvider>
+      </QueryClientProvider>,
     );
-  
+
     const checkbox = screen.getByLabelText("solved");
     const submitButton = screen.getByRole("button", { name: /create/i });
-  
+
     // Check the checkbox
     fireEvent.click(checkbox);
-  
+
     // Submit the form
     fireEvent.click(submitButton);
-  
+
     // Assert: there should be NO validation error shown
     const feedback = screen.queryByText("solved is required.");
     expect(feedback).not.toBeInTheDocument();
   });
-  
-  
+
   test("should show error when 'solved' checkbox is not checked", async () => {
     render(
       <QueryClientProvider client={queryClient}>
         <Router>
           <HelpRequestForm />
         </Router>
-      </QueryClientProvider>
+      </QueryClientProvider>,
     );
-  
+
     const submitButton = screen.getByRole("button", { name: /create/i });
-  
+
     // Submit without checking the checkbox
     fireEvent.click(submitButton);
-  
+
     // Expect the validation message to appear
     const errorMessage = await screen.findByText("solved is required.");
     expect(errorMessage).toBeInTheDocument();
   });
-  
-  
-  
-
-   
-
-
 
   test("That the removeZ function works properly", () => {
     expect(removeZ("ABC")).toBe("ABC");
     expect(removeZ("ABCZ")).toBe("ABC");
   });
-  
 
   test("renders correctly with no initialContents", async () => {
     render(
@@ -103,82 +92,86 @@ describe("HelpRequestForm tests", () => {
     });
   });
 
-    test("renders correctly when passing in initialContents", async () => {
-      render(
-        <QueryClientProvider client={queryClient}>
-          <Router>
-            <HelpRequestForm initialContents={helpRequestFixtures.oneHelpRequest} />
-          </Router>
-        </QueryClientProvider>
-      );
+  test("renders correctly when passing in initialContents", async () => {
+    render(
+      <QueryClientProvider client={queryClient}>
+        <Router>
+          <HelpRequestForm
+            initialContents={helpRequestFixtures.oneHelpRequest}
+          />
+        </Router>
+      </QueryClientProvider>,
+    );
 
-      expect(await screen.findByText(/Create/)).toBeInTheDocument();
+    expect(await screen.findByText(/Create/)).toBeInTheDocument();
 
-      expectedHeaders.forEach((headerText) => {
-        const header = screen.getByText(headerText);
-        expect(header).toBeInTheDocument();
-      });
-
-      expect(await screen.findByTestId(`${testId}-id`)).toBeInTheDocument();
-      expect(screen.getByText(`Id`)).toBeInTheDocument();
-
-      expect(screen.getByLabelText("Id")).toHaveValue(String(helpRequestFixtures.oneHelpRequest.id));
-      expect(screen.getByLabelText("requesterEmail")).toHaveValue(helpRequestFixtures.oneHelpRequest.requesterEmail);
-      expect(screen.getByLabelText("teamId")).toHaveValue(helpRequestFixtures.oneHelpRequest.teamId);
-      expect(screen.getByLabelText("tableOrBreakoutRoom")).toHaveValue(helpRequestFixtures.oneHelpRequest.tableOrBreakoutRoom);
-     // expect(screen.getByLabelText("requestTime")).toHaveValue(helpRequestFixtures.oneHelpRequest.requestTime);
-     const solvedCheckbox = screen.getByLabelText("solved");
-
-     if (helpRequestFixtures.oneHelpRequest.solved) {
-       expect(solvedCheckbox).toBeChecked();
-     } else {
-       expect(solvedCheckbox).not.toBeChecked();
-     }
-
-
-
+    expectedHeaders.forEach((headerText) => {
+      const header = screen.getByText(headerText);
+      expect(header).toBeInTheDocument();
     });
 
-    test("that navigate(-1) is called when Cancel is clicked", async () => {
-      render(
-        <QueryClientProvider client={queryClient}>
-          <Router>
-            <HelpRequestForm />
-          </Router>
-        </QueryClientProvider>,
-      );
-      expect(await screen.findByTestId(`${testId}-cancel`)).toBeInTheDocument();
-      const cancelButton = screen.getByTestId(`${testId}-cancel`);
+    expect(await screen.findByTestId(`${testId}-id`)).toBeInTheDocument();
+    expect(screen.getByText(`Id`)).toBeInTheDocument();
 
-      fireEvent.click(cancelButton);
+    expect(screen.getByLabelText("Id")).toHaveValue(
+      String(helpRequestFixtures.oneHelpRequest.id),
+    );
+    expect(screen.getByLabelText("requesterEmail")).toHaveValue(
+      helpRequestFixtures.oneHelpRequest.requesterEmail,
+    );
+    expect(screen.getByLabelText("teamId")).toHaveValue(
+      helpRequestFixtures.oneHelpRequest.teamId,
+    );
+    expect(screen.getByLabelText("tableOrBreakoutRoom")).toHaveValue(
+      helpRequestFixtures.oneHelpRequest.tableOrBreakoutRoom,
+    );
+    // expect(screen.getByLabelText("requestTime")).toHaveValue(helpRequestFixtures.oneHelpRequest.requestTime);
+    const solvedCheckbox = screen.getByLabelText("solved");
 
-      await waitFor(() => expect(mockedNavigate).toHaveBeenCalledWith(-1));
-    });
+    if (helpRequestFixtures.oneHelpRequest.solved) {
+      expect(solvedCheckbox).toBeChecked();
+    } else {
+      expect(solvedCheckbox).not.toBeChecked();
+    }
+  });
 
-    test("that the correct validations are performed", async () => {
-      render(
-        <QueryClientProvider client={queryClient}>
-          <Router>
-            <HelpRequestForm />
-          </Router>
-        </QueryClientProvider>,
-      );
+  test("that navigate(-1) is called when Cancel is clicked", async () => {
+    render(
+      <QueryClientProvider client={queryClient}>
+        <Router>
+          <HelpRequestForm />
+        </Router>
+      </QueryClientProvider>,
+    );
+    expect(await screen.findByTestId(`${testId}-cancel`)).toBeInTheDocument();
+    const cancelButton = screen.getByTestId(`${testId}-cancel`);
 
-      expect(await screen.findByText(/Create/)).toBeInTheDocument();
-      const submitButton = screen.getByText(/Create/);
-      fireEvent.click(submitButton);
+    fireEvent.click(cancelButton);
 
-      await screen.findByText(/requesterEmail is required/);
-      expect(screen.getByText(/teamId is required/)).toBeInTheDocument();
-      expect(screen.getByText(/tableOrBreakoutRoom is required/)).toBeInTheDocument();
-      expect(screen.getByText(/requestTime is required/)).toBeInTheDocument();
-      expect(screen.getByText(/explanation is required/)).toBeInTheDocument();
-      expect(screen.getByText(/solved is required/)).toBeInTheDocument();
+    await waitFor(() => expect(mockedNavigate).toHaveBeenCalledWith(-1));
+  });
 
+  test("that the correct validations are performed", async () => {
+    render(
+      <QueryClientProvider client={queryClient}>
+        <Router>
+          <HelpRequestForm />
+        </Router>
+      </QueryClientProvider>,
+    );
 
+    expect(await screen.findByText(/Create/)).toBeInTheDocument();
+    const submitButton = screen.getByText(/Create/);
+    fireEvent.click(submitButton);
 
-
-
+    await screen.findByText(/requesterEmail is required/);
+    expect(screen.getByText(/teamId is required/)).toBeInTheDocument();
+    expect(
+      screen.getByText(/tableOrBreakoutRoom is required/),
+    ).toBeInTheDocument();
+    expect(screen.getByText(/requestTime is required/)).toBeInTheDocument();
+    expect(screen.getByText(/explanation is required/)).toBeInTheDocument();
+    expect(screen.getByText(/solved is required/)).toBeInTheDocument();
 
     //   const nameInput = screen.getByTestId(`${testId}-name`);
     //   fireEvent.change(nameInput, { target: { value: "a".repeat(31) } });
@@ -187,5 +180,5 @@ describe("HelpRequestForm tests", () => {
     //   await waitFor(() => {
     //     expect(screen.getByText(/Max length 30 characters/)).toBeInTheDocument();
     //   });
-    });
+  });
 });
