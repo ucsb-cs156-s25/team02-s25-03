@@ -2,8 +2,8 @@ import { Button, Form } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 
-export function removeZ(myString) {
-  return myString.replace("Z", "");
+export function removeZ(mystring) {
+  return mystring.replace("Z", "");
 }
 
 function HelpRequestForm({
@@ -83,7 +83,7 @@ function HelpRequestForm({
           type="text"
           isInvalid={Boolean(errors.teamId)}
           {...register("teamId", {
-            required: "teamId is required",
+            required: "teamId is required.",
           })}
         />
         <Form.Control.Feedback type="invalid">
@@ -100,7 +100,7 @@ function HelpRequestForm({
           type="text"
           isInvalid={Boolean(errors.tableOrBreakoutRoom)}
           {...register("tableOrBreakoutRoom", {
-            required: "tableOrBreakoutRoom is required",
+            required: "tableOrBreakoutRoom is required.",
           })}
         />
         <Form.Control.Feedback type="invalid">
@@ -120,7 +120,7 @@ function HelpRequestForm({
           })}
         />
         <Form.Control.Feedback type="invalid">
-          {errors.requestTime && "requestTime is required"}
+          {errors.requestTime && "requestTime is required. "}
         </Form.Control.Feedback>
       </Form.Group>
 
@@ -145,9 +145,6 @@ function HelpRequestForm({
           type="checkbox"
           id="solved"
           isInvalid={Boolean(errors.solved)}
-          {...register("solved", {
-            validate: (value) => value === true || "solved is required",
-          })}
           {...register("solved")}
         />
         <Form.Control.Feedback type="invalid">

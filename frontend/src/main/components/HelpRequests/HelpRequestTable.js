@@ -64,7 +64,6 @@ export default function HelpRequestTable({
     },
     {
       Header: "solved",
-      accessor: "solved",
     },
   ];
 

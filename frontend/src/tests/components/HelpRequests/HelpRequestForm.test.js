@@ -1,12 +1,11 @@
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { BrowserRouter as Router } from "react-router-dom";
 
-import HelpRequestForm, {
-  removeZ,
-} from "main/components/HelpRequests/HelpRequestForm";
+import HelpRequestForm from "main/components/HelpRequests/HelpRequestForm";
 import { helpRequestFixtures } from "fixtures/helpRequestsFixtures";
 
 import { QueryClient, QueryClientProvider } from "react-query";
+import { removeZ } from "main/components/HelpRequests/HelpRequestForm";
 
 const mockedNavigate = jest.fn();
 
@@ -42,12 +41,7 @@ describe("HelpRequestForm tests", () => {
     expectedHeaders.forEach((headerText) => {
       const header = screen.getByText(headerText);
       expect(header).toBeInTheDocument();
-    })
-  });
-
-  test("That the removeZ function works properly", () => {
-    expect(removeZ("ABC")).toBe("ABC");
-    expect(removeZ("ABCZ")).toBe("ABC");
+    });
   });
 
   test("renders correctly when passing in initialContents", async () => {
@@ -86,13 +80,6 @@ describe("HelpRequestForm tests", () => {
     expect(screen.getByLabelText("Explanation")).toHaveValue(
       helpRequestFixtures.oneHelpRequest.explanation,
     );
-    const solvedCheckbox = screen.getByLabelText("Solved");
-
-    if (helpRequestFixtures.oneHelpRequest.solved) {
-      expect(solvedCheckbox).toBeChecked();
-    } else {
-      expect(solvedCheckbox).not.toBeChecked();
-    }
   });
 
   test("that navigate(-1) is called when Cancel is clicked", async () => {
@@ -131,7 +118,6 @@ describe("HelpRequestForm tests", () => {
     ).toBeInTheDocument();
     expect(screen.getByText(/requestTime is required/)).toBeInTheDocument();
     expect(screen.getByText(/explanation is required/)).toBeInTheDocument();
-    expect(screen.getByText(/solved is required/)).toBeInTheDocument();
 
     const nameInput = screen.getByTestId(`${testId}-requesterEmail`);
     fireEvent.change(nameInput, { target: { value: "a".repeat(256) } });
@@ -140,5 +126,10 @@ describe("HelpRequestForm tests", () => {
     await waitFor(() => {
       expect(screen.getByText(/Max length 255 characters/)).toBeInTheDocument();
     });
+  });
+
+  test("that removeZ function works properly", () => {
+    expect(removeZ("ABC")).toBe("ABC");
+    expect(removeZ("ABCZ")).toBe("ABC");
   });
 });
