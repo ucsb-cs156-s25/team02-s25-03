@@ -5,10 +5,6 @@ import { useNavigate } from "react-router-dom";
 export function removeZ(myString) {
   if (typeof myString !== "string") return myString;
   return myString.replace("Z", "");
-
-export function removeZ(mystring) {
-  return mystring.replace("Z", "");
-
 }
 
 function HelpRequestForm({
@@ -150,13 +146,10 @@ function HelpRequestForm({
           type="checkbox"
           id="solved"
           isInvalid={Boolean(errors.solved)}
-          
           {...register("solved", {
             validate: (value) => value === true || "solved is required.",
           })}
-
           {...register("solved")}
-
         />
         <Form.Control.Feedback type="invalid">
           {errors.solved?.message}
