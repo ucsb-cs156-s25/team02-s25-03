@@ -23,4 +23,4 @@ repo_name: "TBD"
 repo: ucsb-cs156-s25/team02-s25-03
 owner: ucsb-cs156-s25
 repo_name: team02-s25-03
-pull_requests: [{"author":{"id":"U_kgDOBvSp8w","is_bot":false,"login":"saahasburicha","name":"Saahas Buricha"},"headRefName":"pc-helprequest-integrationtest","number":135,"title":"set up integration tests for HelpRequests","url":"https://github.com/ucsb-cs156-s25/team02-s25-03/pull/135"}]
+pull_requests: [{"author":{"id":"U_kgDOCNntvg","is_bot":false,"login":"kwilliams812","name":"Kade Williams"},"headRefName":"Kade-UCSBOrganizationWebIT","number":136,"title":"KW - Added UCSB Organization Web IT test based on the Restruant Web IT tests","url":"https://github.com/ucsb-cs156-s25/team02-s25-03/pull/136"},{"author":{"id":"U_kgDOBvSp8w","is_bot":false,"login":"saahasburicha","name":"Saahas Buricha"},"headRefName":"pc-helprequest-integrationtest","number":135,"title":"set up integration tests for HelpRequests","url":"https://github.com/ucsb-cs156-s25/team02-s25-03/pull/135"}]
