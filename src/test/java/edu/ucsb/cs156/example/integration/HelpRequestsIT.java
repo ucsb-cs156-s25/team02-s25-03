@@ -114,6 +114,7 @@ public class HelpRequestsIT {
                                 .andExpect(status().isOk()).andReturn();
 
                 // assert
+                helpRequest1.setId(1);
                 String expectedJson = mapper.writeValueAsString(helpRequest1);
                 String responseString = response.getResponse().getContentAsString();
                 assertEquals(expectedJson, responseString);
